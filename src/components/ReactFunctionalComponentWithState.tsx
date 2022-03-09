@@ -13,7 +13,7 @@ const FunctionalComponentWithState: React.FC = () => {
   return (
     <>
       <h1 className='functional-component-state'>
-        Hello react {greeting} and react functional component!
+        Hello react {greeting} and react functional component with state!
       </h1>
       <button onClick={memoizedSwitcher}>Click-ck</button>
     </>
