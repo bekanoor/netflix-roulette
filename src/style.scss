@@ -1,16 +1,9 @@
+body {
+  box-sizing: border-box;
+}
+
 .App {
-  font-family: sans-serif;
-  text-align: center;
-}
-.react-component {
-  color: green;
-}
-.pure-component {
-  color: palevioletred;
-}
-.functional-component {
-  color: blueviolet;
-}
-.functional-component-state {
-  color: chocolate;
+  max-width: 1200px;
+  height: 100px;
+  margin: 0 auto;
 }
