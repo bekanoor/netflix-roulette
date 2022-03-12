@@ -9,4 +9,7 @@ body {
   max-width: 1200px;
   margin: 0 auto;
   height: 600px;
+  background: url('./image.png')
 }
+
+@import './components/Header/_header.scss';

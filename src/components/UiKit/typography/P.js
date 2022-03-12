@@ -34,7 +34,7 @@ const P = styled.p`
   font-family: 'Montserrat', sans-serif;
   font-style: normal;
   line-height: 24px;
-  font-weight: ${props => weight[props.weight]};
+  font-weight: ${(props) => weight[props.weight]};
   font-size: ${props => font[props.font]};
   color: ${props => theme[props.theme].color};
   opacity: ${props => props.opacity};
