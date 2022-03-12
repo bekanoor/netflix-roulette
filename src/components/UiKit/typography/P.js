@@ -31,7 +31,7 @@ const weight = {
 }
 
 const P = styled.p`
-  font-family: 'Montserrat';
+  font-family: 'Montserrat', sans-serif;
   font-style: normal;
   line-height: 24px;
   font-weight: ${props => weight[props.weight]};

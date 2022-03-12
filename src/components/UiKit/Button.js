@@ -41,7 +41,7 @@ const color = {
 }
 
 const Button = styled.button`
-    font-family: Montserrat;
+    font-family: Montserrat, sans-serif;
     font-weight: 500;
     background-color: ${props => theme[props.theme].default};
     width: ${props => size[props.size].width};
