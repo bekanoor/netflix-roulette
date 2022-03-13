@@ -1,12 +1,20 @@
 import React from 'react';
+import Button from '../UiKit/Button'
+import Input from '../UiKit/Input'
 
-type Props = {
-  register?: string;
-}
-const Header:React.FC<Props> = (props:Props) => {
+const Header:React.FC = () => {
   return (
-    <div>wd</div>
+    <>
+      <Button theme='warning' size='standard' color='red'>button</Button>
+      <Input width='large'></Input>
+    </>
   )
+}
+
+Button.defaultProps = {
+  theme: 'blank',
+  size: 'standard',
+  color: 'white',
 }
 
 export default Header;

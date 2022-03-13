@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled from 'styled-components'
 
 const H1 = styled.h1`
   text-transform: uppercase;
@@ -11,4 +11,4 @@ const H1 = styled.h1`
   letter-spacing: 1px;
 `
 
-export default H1;
+export default H1

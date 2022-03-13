@@ -1,19 +1,24 @@
-import styled from 'styled-components';
+import styled from 'styled-components'
 
-const width = {
+type widthTypes = 'large' | 'medium' | 'small';
+
+interface Props {
+  width: widthTypes;
+}
+
+const widthOption = {
   large: '1024px',
   medium: '714px',
   small: '514px'  
 }
 
-
-const Input = styled.input`
+const Input = styled.input<Props>`
   font-family: 'Montserrat', sans-serif;
-  width: ${props => width[props.width]};
+  width: ${(props) => widthOption[props.width]};
   height: 56px;
   font-size: 20px;
   padding: 0px 10px;
-  outline:none;
+  outline:none; 
   border: none;
   border-bottom: solid;
   border-color: red;

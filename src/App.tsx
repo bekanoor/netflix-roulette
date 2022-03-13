@@ -1,9 +1,9 @@
-import P from './components/UiKit/typography/P';
+import Header from "./components/Header/Header";
 
 export default function App() {
   return (
       <div className='wrapper'>
-        <P font='large'>qsw</P>
+        <Header></Header>
       </div>
   );
 }
