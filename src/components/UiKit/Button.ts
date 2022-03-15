@@ -84,7 +84,7 @@ const Button = styled.button<Props>`
   cursor: pointer;
   text-transform: uppercase;
   border: none;
-  transition: ease background-color 250ms;
+  transition: ease background-color 300ms;
 
   &:hover {
     background-color: ${({theme = 'danger'}: Props) => themeOption[theme].hover};
@@ -93,7 +93,7 @@ const Button = styled.button<Props>`
 
 Button.defaultProps = {
   theme: 'danger',
-  size: 'small',
+  size: 'standard',
   color: 'white',
 }
 
