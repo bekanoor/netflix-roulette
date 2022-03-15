@@ -14,25 +14,25 @@ interface Theme {
 }
 
 type themeType = {
-  default: string
+  standard: string
   hover: string
 }
 
 const themeOption = {
   blank: {
-    default: 'rgba(96, 96, 96, 0.68)',
+    standard: 'rgba(96, 96, 96, 0.68)',
     hover: ' rgba(96, 96, 96, 1);',
   },
   danger: {
-    default: '#F65261',
+    standard: '#F65261',
     hover: '#b71c1c',
   },
   warning: {
-    default: '#ffeb3b',
+    standard: '#ffeb3b',
     hover: '#fbc02d',
   },
   white: {
-    default: '#ffffff',
+    standard: '#ffffff',
     hover: '#e3f2fd',
   },
 }
@@ -76,10 +76,10 @@ const colorOption = {
 const Button = styled.button<Props>`
   font-family: Montserrat, sans-serif;
   font-weight: 500;
-  background-color: ${(props: Props) => themeOption[props.theme].default};
-  width: ${(props) => sizeOption[props.size].width};
-  height: ${(props) => sizeOption[props.size].height};
-  color: ${(props) => colorOption[props.color]};
+  background-color: ${({theme = 'danger'}: Props) => themeOption[theme].standard};
+  width: ${({size = 'standard'}: Props) => sizeOption[size].width};
+  height: ${({size = 'standard'}: Props) => sizeOption[size].height};
+  color: ${({color = 'white'}: Props) => colorOption[color]};
   border-radius: 4px;
   cursor: pointer;
   text-transform: uppercase;
@@ -87,13 +87,13 @@ const Button = styled.button<Props>`
   transition: ease background-color 250ms;
 
   &:hover {
-    background-color: ${(props: Props) => themeOption[props.theme].hover};
+    background-color: ${({theme = 'danger'}: Props) => themeOption[theme].hover};
   }
 `
 
 Button.defaultProps = {
-  theme: 'blank',
-  size: 'standard',
+  theme: 'danger',
+  size: 'small',
   color: 'white',
 }
 

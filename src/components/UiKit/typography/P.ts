@@ -67,14 +67,15 @@ const weightOption = {
 }
 
 const P = styled.p<Props>`
+  margin: 0;
   font-family: 'Montserrat', sans-serif;
   font-style: normal;
   line-height: 24px;
-  color: ${(props: Props) => themeOption[props.theme].color};
-  font-weight: ${(props) => weightOption[props.weight]};
-  font-size: ${(props) => fontOption[props.font]};
-  opacity: ${(props) => props.opacity};
-  text-transform: ${(props: Props) => registerOption[props.register]};
+  color: ${({theme = 'black'}:Props) => themeOption[theme].color};
+  font-weight: ${({weight = 'regular'}) => weightOption[weight]};
+  font-size: ${({font = 'regular'}) => fontOption[font]};
+  opacity: ${({opacity = 1}) => opacity};
+  text-transform: ${({register = 'down'}: Props) => registerOption[register]};
 `
 
 P.defaultProps = {

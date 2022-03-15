@@ -3,7 +3,7 @@ import styled from 'styled-components'
 type widthTypes = 'large' | 'medium' | 'small';
 
 interface Props {
-  width: widthTypes;
+  width?: widthTypes;
 }
 
 const widthOption = {
@@ -14,14 +14,16 @@ const widthOption = {
 
 const Input = styled.input<Props>`
   font-family: 'Montserrat', sans-serif;
-  width: ${(props) => widthOption[props.width]};
+  width: ${({width = 'medium'}) => widthOption[width]};
   height: 56px;
   font-size: 20px;
   padding: 0px 10px;
   outline:none; 
+  color: white;
   border: none;
   border-bottom: solid;
   border-color: red;
+  background-color: #232323;
 `;
 
 Input.defaultProps = {

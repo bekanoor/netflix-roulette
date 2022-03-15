@@ -1,20 +1,15 @@
-import React from 'react';
+import React from 'react'
 import Button from '../UiKit/Button'
 import Input from '../UiKit/Input'
+import P from '../UiKit/typography/P'
+import H1 from '../UiKit/typography/H1'
 
-const Header:React.FC = () => {
+const Header = () => {
   return (
-    <>
-      <Button theme='warning' size='standard' color='red'>button</Button>
-      <Input width='large'></Input>
-    </>
+    <header className='header'>
+     
+    </header>
   )
 }
 
-Button.defaultProps = {
-  theme: 'blank',
-  size: 'standard',
-  color: 'white',
-}
-
-export default Header;
+export default Header
