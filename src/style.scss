@@ -11,4 +11,5 @@ body {
   height: 600px;
 }
 
-@import './components/Header/_header.scss';
+@import './containers/Header/header';
+@import './containers/Main/main'
