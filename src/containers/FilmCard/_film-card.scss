@@ -1,0 +1,44 @@
+.film-card {
+  width: 320px;
+  cursor: pointer;
+  margin: 25px 0;
+  
+  &__title {
+    text-transform: uppercase;
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 22px;
+    color: #FFFFFF;
+    mix-blend-mode: normal;
+    opacity: 0.7;
+
+  }
+  &__image-container {
+  }
+  &__image {
+    width: 100%;
+  }
+  &__title-container {
+    margin-top: 10px;
+    display: flex;
+    justify-content: space-between;
+  }
+  &__release-date {
+    color: white;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 14px;
+    width: 66px;
+    height: 26px;
+    border: 1px solid rgba($color: #ffffff, $alpha: .7);
+    background-color: #232323;
+    border-radius: 5px;
+  }
+  &__genre {
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 17px;
+    color: #FFFFFF;
+    mix-blend-mode: normal;
+    opacity: 0.5;
+  }
+}

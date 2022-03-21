@@ -1,27 +1,24 @@
-const Main = (props: any) => {
+import { FilmCard } from '../FilmCard'
 
+interface IProps {
+  movies: Array<object>
+}
+
+const Main = (props: IProps) => {
   return (
-    <main>
+    <main className='movies-wrapper'>
       {props.movies.map((item: any) => {
-        const image = 'Avengers-War-of-Infinity'
-        console.log(typeof image)
+        const { cover, filmTitle, releaseDate, genre} = item
+        const genreResult =
+          genre.length > 2 ? genre.join(', ') : genre.join(' & ')
+
         return (
-          <div className='film-card'>
-            <div className='film-card__image-container'>
-              <img className='film-card__image' src={item.cover} alt='image'></img>
-            </div>
-            <div className='film-card__title-container'>
-              <p
-              >
-                {item.filmTitle}
-              </p>
-              <p className='film-card__release-date'>{item.releaseDate}</p>
-            </div>
-            <p
-            >
-              {/* {item.genre.length > 2 ? item.genre.join(', ') : item.genre.join(' & ')} */}
-            </p>
-          </div>
+          <FilmCard
+            cover={cover}
+            filmTitle={filmTitle}
+            releaseDate={releaseDate}
+            genre={genreResult}
+          ></FilmCard>
         )
       })}
     </main>

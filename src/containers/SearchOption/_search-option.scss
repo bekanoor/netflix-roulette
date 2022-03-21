@@ -1,0 +1,24 @@
+$primary-red: #F65261;
+
+.option-list {
+  display: flex;
+  width: 300px;
+  justify-content: space-between;
+  align-items: center;
+
+  &__item {
+    color: white;
+    text-transform: uppercase;
+  }
+  &__button {
+    text-transform: uppercase;
+    background-color: #555555;
+    width: 80px;
+    height: 30px;
+    color: white;
+    border-radius: 5px;
+  }
+  &__button--active {
+    background-color: $primary-red;
+  }
+}
