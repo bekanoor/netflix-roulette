@@ -1,7 +1,16 @@
 import { Button } from '../../components'
 import { SearchOption } from '../SearchOption'
 
-const Header = (props: any) => {
+interface IProps {
+  inputOnChange: (value: string) => void
+  searchTypeOnChange: (value: string) => void
+}
+
+const Header = (props: IProps) => {
+  const handleInputChange = (event: any) => {
+    props.inputOnChange(event.target.value)
+  }
+
   return (
     <header className='header'>
       <p className='header__logo'>
@@ -10,7 +19,11 @@ const Header = (props: any) => {
       </p>
       <h1 className='main-title'>FIND YOUR MOVIE</h1>
       <div>
-        <input className='input-search header__input' placeholder='What do you want to watch?'></input>
+        <input
+          onChange={handleInputChange}
+          className='input-search header__input'
+          placeholder='What do you want to watch?'
+        ></input>
         <Button
           className='header__search-btn'
           theme='danger'
@@ -21,7 +34,9 @@ const Header = (props: any) => {
         </Button>
       </div>
       <div className='header__search-option'>
-        <SearchOption></SearchOption>
+        <SearchOption
+          searchTypeOnChange={props.searchTypeOnChange}
+        ></SearchOption>
       </div>
     </header>
   )

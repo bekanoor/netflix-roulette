@@ -1,8 +1,9 @@
 import { FilmCard } from '../FilmCard'
 
 interface IProps {
-  movies: Array<object>
+  movies: Array<object>;
 }
+
 const getGenreLength = (item: string[]) =>
   item.length > 2 ? item.join(', ') : item.join(' & ')
 

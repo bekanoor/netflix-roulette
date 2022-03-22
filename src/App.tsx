@@ -1,22 +1,9 @@
-import { useEffect, useState } from 'react'
-import { Header, Main, Footer } from './containers'
-import Data from './Data/data'
+import { MainPage } from './containers/MainPage'
 
 export default function App() {
-  const [data, setData] = useState<Array<object>>([{}])
-
-  useEffect(() => {
-    setTimeout(() => {
-      const requestData: object[] = Data
-      setData(requestData)
-    }, 42)
-  }, [data])
-
   return (
-    <div className='wrapper'>
-      <Header></Header>
-      <Main movies={data}></Main>
-      <Footer></Footer>
-    </div>
+    <>
+      <MainPage></MainPage>
+    </>
   )
 }
