@@ -1,9 +1,16 @@
-import { MainPage } from './containers/MainPage'
+import { useState } from 'react'
+import { MainPage, ViewPage } from './containers/'
 
 export default function App() {
+  const [page, setPage] = useState('main');
+  
+  const handleChangePage = (value: string) => {
+    setPage(value);
+  }
+
   return (
     <>
-      <MainPage></MainPage>
+      {page === 'main' ? <MainPage onChangePage={handleChangePage}></MainPage> : <ViewPage></ViewPage>}
     </>
   )
 }

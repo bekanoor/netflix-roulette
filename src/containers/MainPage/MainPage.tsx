@@ -2,13 +2,17 @@ import { useEffect, useState } from 'react'
 import { Header, Main, Footer } from '../'
 import Data from '../../Data/data'
 
-const MainPage = () => {
+interface IProps {
+  onChangePage: (value: string) => void
+}
+
+const MainPage = (props: IProps) => {
   const [data, setData] = useState<Array<object>>([])
   const [input, setInput] = useState('')
   const [searchType, setSearchType] = useState('title')
 
   console.log(searchType)
-  
+
   const handleInputChange = (value: string) => {
     setInput(value)
   }
@@ -26,8 +30,13 @@ const MainPage = () => {
 
   return (
     <div className='wrapper'>
-      <Header inputOnChange={handleInputChange} searchTypeOnChange={handleSearchType}></Header>
-      {data.length > 1 && <Main movies={data}></Main>}
+      <Header
+        inputOnChange={handleInputChange}
+        searchTypeOnChange={handleSearchType}
+      ></Header>
+      {data.length > 1 && (
+        <Main movies={data} onChangePage={props.onChangePage}></Main>
+      )}
       <Footer></Footer>
     </div>
   )

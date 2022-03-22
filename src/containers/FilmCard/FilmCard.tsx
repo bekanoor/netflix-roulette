@@ -3,11 +3,16 @@ interface IProps {
   filmTitle: string
   releaseDate: string
   genre: string
+  onChangePage: (value: string) => void;
 }
 
 const FilmCard = (props: IProps) => {
+  const handelChange = () => {
+    props.onChangePage('view');
+  }
+
   return (
-    <div className='film-card'>
+    <div className='film-card' onClick={handelChange}>
       <div className='film-card__image-container'>
         <img className='film-card__image' src={props.cover} alt='image'></img>
       </div>

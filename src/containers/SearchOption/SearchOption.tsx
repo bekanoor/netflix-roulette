@@ -3,7 +3,11 @@ interface IProps {
 }
 
 const SearchOption = (props: IProps) => {
-  const switchColor = () => {
+  const switchColor = (event: React.MouseEvent<HTMLElement>) => {
+    if(event.currentTarget.classList.contains('option-list__button--active')) {
+     return;
+    }
+
     const buttons = document.querySelectorAll('.option-list__button')
     const firstBtn = buttons[0]
     const secondBtn = buttons[1]
@@ -19,13 +23,13 @@ const SearchOption = (props: IProps) => {
     }
   }
 
-  const handleChangeTitle = () => {
-    switchColor()
+  const handleChangeTitle = (e: any) => {
+    switchColor(e)
     props.searchTypeOnChange('title')
   }
 
-  const handleChangeGenre = () => {
-    switchColor()
+  const handleChangeGenre = (e: any) => {
+    switchColor(e)
     props.searchTypeOnChange('genre')
   }
 

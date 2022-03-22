@@ -2,6 +2,7 @@ import { FilmCard } from '../FilmCard'
 
 interface IProps {
   movies: Array<object>;
+  onChangePage: (value: string) => void;
 }
 
 const getGenreLength = (item: string[]) =>
@@ -16,6 +17,7 @@ const Main = (props: IProps) => {
 
         return (
           <FilmCard
+            onChangePage={props.onChangePage}
             cover={cover}
             filmTitle={filmTitle}
             releaseDate={releaseDate}

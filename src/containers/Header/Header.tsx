@@ -7,7 +7,7 @@ interface IProps {
 }
 
 const Header = (props: IProps) => {
-  const handleInputChange = (event: any) => {
+  const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     props.inputOnChange(event.target.value)
   }
 
