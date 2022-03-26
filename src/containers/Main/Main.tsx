@@ -1,22 +1,22 @@
-import { FilmCard } from '../FilmCard'
+import { FilmCard } from '../'
+import { getGenreOutput } from '../functions'
 
 interface IProps {
-  movies: Array<object>;
-  onChangePage: (value: string) => void;
+  movies: Array<object>
+  onChangePage: (value: object) => void
 }
-
-const getGenreLength = (item: string[]) =>
-  item.length > 2 ? item.join(', ') : item.join(' & ')
 
 const Main = (props: IProps) => {
   return (
     <main className='movies-wrapper'>
-      {props.movies.map((item: any) => {
+      {props.movies.map((item: any, index: number) => {
         const { cover, filmTitle, releaseDate } = item
-        const genreResult = getGenreLength(item.genre)
+        const genreResult = getGenreOutput(item.genre)
 
         return (
           <FilmCard
+            id={index.toString()}
+            key={index.toString()}
             onChangePage={props.onChangePage}
             cover={cover}
             filmTitle={filmTitle}

@@ -20,7 +20,6 @@ body {
   margin: 0 auto;
   height: 600px;
 }
-
 .main-title {
   font-weight: 300;
   font-size: 40px;
@@ -29,7 +28,6 @@ body {
   text-transform: uppercase;
   color: white;
 }
-
 .input-search {
   font-family: 'Montserrat', sans-serif;
   width: 718px;
@@ -46,7 +44,25 @@ body {
   width: 1080px;
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-between;
+  justify-content: space-around;
+}
+.search-button {
+  background-color: rgba($color: #606060, $alpha: .8);
+  color: $primary-red;
+  width: 178px;
+  height: 46px;
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 24px;
+  border-radius: 5px;
+}
+.primary-text {
+  font-weight: 300;
+  font-size: 20px;
+  line-height: 24px;
+  color: #FFFFFF;
+  mix-blend-mode: normal;
+  opacity: 0.5;
 }
 
 @import './containers/Header/header';

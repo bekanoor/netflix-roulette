@@ -1,28 +1,32 @@
+import React from 'react'
+
 interface IProps {
   cover: string
   filmTitle: string
   releaseDate: string
   genre: string
-  onChangePage: (value: string) => void;
+  id?: string
+  onChangePage?: (value: object) => void
 }
 
 const FilmCard = (props: IProps) => {
-  const handelChange = () => {
-    props.onChangePage('view');
+  const { onChangePage, cover, filmTitle, genre, releaseDate, id} = props
+
+  const handelChangePage = (e: React.MouseEvent<HTMLDivElement>) => {
+    const id = e.currentTarget.id
+    if (onChangePage) onChangePage({ page: 'view', movieId: id })
   }
 
   return (
-    <div className='film-card' onClick={handelChange}>
+    <div className='film-card' onClick={handelChangePage} id={id}>
       <div className='film-card__image-container'>
-        <img className='film-card__image' src={props.cover} alt='image'></img>
+        <img className='film-card__image' src={cover} alt='image'></img>
       </div>
       <div className='film-card__title-container'>
-        <p className='film-card__title'>{props.filmTitle}</p>
-        <button className='film-card__release-date'>{props.releaseDate}</button>
+        <p className='film-card__title'>{filmTitle}</p>
+        <button className='film-card__release-date'>{releaseDate}</button>
       </div>
-      <p className="film-card__genre">
-        {props.genre}
-      </p>
+      <p className='film-card__genre'>{genre}</p>
     </div>
   )
 }

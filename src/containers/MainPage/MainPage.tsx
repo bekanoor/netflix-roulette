@@ -3,15 +3,13 @@ import { Header, Main, Footer } from '../'
 import Data from '../../Data/data'
 
 interface IProps {
-  onChangePage: (value: string) => void
+  onChangePage: (value: any) => void
 }
 
 const MainPage = (props: IProps) => {
   const [data, setData] = useState<Array<object>>([])
   const [input, setInput] = useState('')
   const [searchType, setSearchType] = useState('title')
-
-  console.log(searchType)
 
   const handleInputChange = (value: string) => {
     setInput(value)
