@@ -11,6 +11,9 @@ const MainPage = (props: IProps) => {
   const [input, setInput] = useState('')
   const [searchType, setSearchType] = useState('title')
 
+  console.log(input);
+  console.log(searchType);
+
   const handleInputChange = (value: string) => {
     setInput(value)
   }

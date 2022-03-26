@@ -8,7 +8,7 @@ interface IProps {
 
 const Header = (props: IProps) => {
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    props.inputOnChange(event.target.value)
+    props.inputOnChange(event.target.value.toLocaleLowerCase())
   }
 
   return (

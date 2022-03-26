@@ -1,12 +1,17 @@
 import React from 'react'
 
+type stateType = {
+  page: string
+  movieId: string
+}
+
 interface IProps {
   cover: string
   filmTitle: string
   releaseDate: string
   genre: string
-  id?: string
-  onChangePage?: (value: object) => void
+  id: string
+  onChangePage: (value: stateType) => void
 }
 
 const FilmCard = (props: IProps) => {

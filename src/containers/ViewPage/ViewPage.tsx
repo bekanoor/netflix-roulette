@@ -64,11 +64,11 @@ const ViewPage = (props: IProps) => {
           </div>
         </div>
         <div className='header-view__movie-with-same-genre'>
-          Films by {movieGenres.join(' ')}
+          Films by {movieGenres.join(' ')} genre
         </div>
       </header>
       <main className='movies-wrapper'>
-        {sameGenreMovie.map((item, index) => {
+        {sameGenreMovie.map((item) => {
           const { cover, genre, filmTitle, releaseDate } = item
           return (
             <FilmCard
@@ -76,6 +76,8 @@ const ViewPage = (props: IProps) => {
               genre={getGenreOutput(genre)}
               filmTitle={filmTitle}
               releaseDate={releaseDate}
+              id={item.id.toString()}
+              onChangePage={props.onChangePage}
             />
           )
         })}

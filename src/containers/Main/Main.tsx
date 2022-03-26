@@ -15,7 +15,7 @@ const Main = (props: IProps) => {
 
         return (
           <FilmCard
-            id={index.toString()}
+            id={item.id.toString()}
             key={index.toString()}
             onChangePage={props.onChangePage}
             cover={cover}
