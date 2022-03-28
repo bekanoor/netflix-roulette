@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { MainPage, ViewPage } from './containers/'
+import { MainPage, ViewPage, ErrorBoundary } from './containers/'
 
 type stateType = {
   page: string;
@@ -12,14 +12,12 @@ export default function App() {
     movieId: "0",
   })
 
-  console.log(page.movieId)
-
   const handleChangePage = (obj: stateType) => {
     setPage(obj)
   }
 
   return (
-    <>
+    <ErrorBoundary>
       {page.page === 'main' ? (
         <MainPage onChangePage={handleChangePage}></MainPage>
       ) : (
@@ -28,6 +26,6 @@ export default function App() {
           onChangePage={handleChangePage}
         ></ViewPage>
       )}
-    </>
+    </ErrorBoundary>
   )
 }

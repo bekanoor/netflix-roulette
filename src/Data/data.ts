@@ -7,7 +7,8 @@ import Image6 from '../assets/images/Reservoir-dogs.jpg'
 
 const data = [
   {
-    "filmTitle": "pulp Fiction",
+    "rating": 4.5,
+    "filmTitle": "Pulp Fiction",
     "genre": ["Action", "Adventure"],
     "releaseDate": "1994",
     "cover": Image,
@@ -16,6 +17,7 @@ const data = [
     "description": "The lives of two mob hitmen, a boxer, a gangster and his wife, and a pair of diner bandits intertwine in four tales of violence and redemption.",
   },
   {
+    "rating": 4.3,
     "filmTitle": "Bohemian Rhapsody",
     "genre": ["Drama", "Biography", "Music"],
     "releaseDate": "2018",
@@ -25,6 +27,7 @@ const data = [
     "description": "The story of the legendary British rock band Queen and lead singer Freddie Mercury, leading up to their famous performance at Live Aid (1985)."
   },
   {
+    "rating": 4.7,
     "filmTitle": "Kill Bill: Vol 2",
     "genre": ["Oscar winning Movie"],
     "releaseDate": "2004",
@@ -34,6 +37,7 @@ const data = [
     "description": "The Bride continues her quest of vengeance against her former boss and lover Bill, the reclusive bouncer Budd, and the treacherous, one-eyed Elle."
   },
   {
+    "rating": 3.5,
     "filmTitle": "Avengers: War of Infinity",
     "genre": ["Action", "Adventure"],
     "releaseDate": "2018",
@@ -43,6 +47,7 @@ const data = [
     "description": "The Avengers and their allies must be willing to sacrifice all in an attempt to defeat the powerful Thanos before his blitz of devastation and ruin puts an end to the universe."
   },
   {
+    "rating": 4.2,
     "filmTitle": "Inception",
     "genre": ["Action", "Adventure"],
     "releaseDate": "2010",
@@ -52,6 +57,7 @@ const data = [
     "description": "A thief who steals corporate secrets through the use of dream-sharing technology is given the inverse task of planting an idea into the mind of a C.E.O., but his tragic past may doom the project and his team to disaster."
   },
   {
+    "rating": 3.9,
     "filmTitle": "Reservoir dogs",
     "genre": ["Oscar winning Movie"],
     "releaseDate": "1992",

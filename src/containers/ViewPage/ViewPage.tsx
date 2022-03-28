@@ -46,7 +46,7 @@ const ViewPage = (props: IProps) => {
             />
           </div>
           <div className='header-view__info'>
-            <h1 className='main-title'>{data[parsedId].filmTitle}</h1>
+            <h1 className='main-title'>{data[parsedId].filmTitle} <button className='header-view__score'>{data[parsedId].rating}</button></h1>
             <p className='header-view__genres primary-text'>
               {data[parsedId].genre.join(', ')}
             </p>
@@ -64,7 +64,7 @@ const ViewPage = (props: IProps) => {
           </div>
         </div>
         <div className='header-view__movie-with-same-genre'>
-          Films by {movieGenres.join(' ')} genre
+          Films by {movieGenres.join(', ')} genre
         </div>
       </header>
       <main className='movies-wrapper'>

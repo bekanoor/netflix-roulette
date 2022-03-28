@@ -35,7 +35,7 @@ const MainPage = (props: IProps) => {
 
     if (searchType === 'genre') {
       matched = data.filter((item: any) =>
-        item.genre.join(' ').toLowerCase().startsWith(searchInput)
+        item.genre.join(' ').toLowerCase().includes(searchInput)
       )
     }
 
