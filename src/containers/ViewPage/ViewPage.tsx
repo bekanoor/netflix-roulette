@@ -72,6 +72,7 @@ const ViewPage = (props: IProps) => {
           const { cover, genre, filmTitle, releaseDate } = item
           return (
             <FilmCard
+              key={item.id.toString()}
               cover={cover}
               genre={getGenreOutput(genre)}
               filmTitle={filmTitle}

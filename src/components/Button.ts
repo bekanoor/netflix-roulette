@@ -90,11 +90,4 @@ const Button = styled.button<Props>`
     background-color: ${({theme = 'danger'}: Props) => themeOption[theme].hover};
   }
 `
-
-Button.defaultProps = {
-  theme: 'danger',
-  size: 'standard',
-  color: 'white',
-}
-
 export default Button

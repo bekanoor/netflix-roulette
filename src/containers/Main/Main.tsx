@@ -1,22 +1,28 @@
+import { Props } from 'react'
 import { FilmCard } from '../'
 import { getGenreOutput } from '../functions'
 
+type stateType = {
+  page: string
+  movieId: string
+}
+
 interface IProps {
   movies: Array<object>
-  onChangePage: (value: object) => void
+  onChangePage: (value: stateType) => void
 }
 
 const Main = (props: IProps) => {
   return (
     <main className='movies-wrapper'>
-      {props.movies.map((item: any, index: number) => {
-        const { cover, filmTitle, releaseDate } = item
-        const genreResult = getGenreOutput(item.genre)
+      {props.movies.map((item: any) => {
+        const { cover, filmTitle, releaseDate, id, genre } = item
+        const genreResult = getGenreOutput(genre)
 
         return (
           <FilmCard
-            id={item.id.toString()}
-            key={index.toString()}
+            id={id.toString()}
+            key={id}
             onChangePage={props.onChangePage}
             cover={cover}
             filmTitle={filmTitle}

@@ -11,7 +11,7 @@ export default function App() {
     page: 'main',
     movieId: "0",
   })
-  
+
   console.log(page.movieId)
 
   const handleChangePage = (obj: stateType) => {

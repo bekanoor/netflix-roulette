@@ -7,7 +7,7 @@ import Image6 from '../assets/images/Reservoir-dogs.jpg'
 
 const data = [
   {
-    "filmTitle": "Pulp Fiction",
+    "filmTitle": "pulp Fiction",
     "genre": ["Action", "Adventure"],
     "releaseDate": "1994",
     "cover": Image,

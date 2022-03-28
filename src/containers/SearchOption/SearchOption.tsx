@@ -1,11 +1,11 @@
 interface IProps {
-  searchTypeOnChange: (value: string) => void
+  typeSwitcher: (value: string) => void
 }
 
 const SearchOption = (props: IProps) => {
   const switchColor = (event: React.MouseEvent<HTMLElement>) => {
-    if(event.currentTarget.classList.contains('option-list__button--active')) {
-     return;
+    if (event.currentTarget.classList.contains('option-list__button--active')) {
+      return
     }
 
     const buttons = document.querySelectorAll('.option-list__button')
@@ -25,12 +25,12 @@ const SearchOption = (props: IProps) => {
 
   const handleChangeTitle = (e: any) => {
     switchColor(e)
-    props.searchTypeOnChange('title')
+    props.typeSwitcher('title')
   }
 
   const handleChangeGenre = (e: any) => {
     switchColor(e)
-    props.searchTypeOnChange('genre')
+    props.typeSwitcher('genre')
   }
 
   return (

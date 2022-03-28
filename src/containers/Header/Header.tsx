@@ -3,12 +3,19 @@ import { SearchOption } from '../SearchOption'
 
 interface IProps {
   inputOnChange: (value: string) => void
-  searchTypeOnChange: (value: string) => void
+  typeSwitcher: (value: string) => void
+  setSearch: (input: string) => void;
+  searchType: string;
+  input: string;
 }
 
 const Header = (props: IProps) => {
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     props.inputOnChange(event.target.value.toLocaleLowerCase())
+  }
+
+  const buttonHandler = () => {
+    props.setSearch('active');
   }
 
   return (
@@ -29,13 +36,14 @@ const Header = (props: IProps) => {
           theme='danger'
           size='standard'
           color='white'
+          onClick={buttonHandler}
         >
           SEARCH
         </Button>
       </div>
       <div className='header__search-option'>
         <SearchOption
-          searchTypeOnChange={props.searchTypeOnChange}
+          typeSwitcher={props.typeSwitcher}
         ></SearchOption>
       </div>
     </header>
