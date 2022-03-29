@@ -3,25 +3,21 @@ import { useEffect, useState } from 'react'
 import { Header, Main, Footer, NoMatches, SortResult } from '../'
 import Data from '../../Data/data'
 import { matchedMovies } from '../../models/functions'
-
-type stateType = {
-  page: string
-  movieId: string
-}
+import { stateType, moviesType } from '../../models/interfaces'
 
 interface IProps {
   onChangePage: (value: stateType) => void
 }
 
 const MainPage = (props: IProps) => {
-  const [data, setData] = useState<Array<object>>([])
+  const [data, setData] = useState<Array<moviesType>>([])
   const [searchInput, setSearchInput] = useState('')
   const [searchType, setSearchType] = useState('title')
   const [searchButton, setSearchButton] = useState('disable')
   const [filterType, setFilterType] = useState('rating')
   useEffect(() => {
     setTimeout(() => {
-      const requestData: object[] = Data
+      const requestData: Array<moviesType> = Data
       setData(requestData)
     }, 42)
   }, [data])
@@ -60,7 +56,7 @@ const MainPage = (props: IProps) => {
         ></SortResult>
         {computedData!.length > 0 ? (
           <Main
-            movies={computedData as Array<object>}
+            movies={computedData as Array<moviesType>}
             onChangePage={props.onChangePage}
           ></Main>
         ) : (

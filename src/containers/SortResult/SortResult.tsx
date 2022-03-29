@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react'
 
 interface IProps {
   movieLength?: number
@@ -6,10 +6,10 @@ interface IProps {
 }
 
 const SortResult = (props: IProps) => {
-  const {movieLength, onClick} = props;
+  const { movieLength, onClick } = props
 
-  const switchColor = (event: React.MouseEvent<HTMLButtonElement>): void  => {
-    const eventTarget = event.currentTarget as HTMLElement;
+  const switchColor = (event: React.MouseEvent<HTMLButtonElement>): void => {
+    const eventTarget = event.currentTarget as HTMLElement
     if (eventTarget.classList.contains('sort-result--active')) {
       return
     }
@@ -29,9 +29,11 @@ const SortResult = (props: IProps) => {
     }
   }
 
-  const handlerChange = (event: React.MouseEvent<HTMLButtonElement, MouseEvent>): void => {
-    const eventTarget = event.target as HTMLElement;
-    switchColor(event);
+  const handlerChange = (
+    event: React.MouseEvent<HTMLButtonElement, MouseEvent>
+  ): void => {
+    const eventTarget = event.target as HTMLElement
+    switchColor(event)
     onClick(eventTarget.innerText)
   }
 
@@ -42,10 +44,17 @@ const SortResult = (props: IProps) => {
         <ul className='sort-result__list'>
           <li className='sort-result__text'>Sort by</li>
           <li>
-            <button onClick={handlerChange} className="sort-result__item">release data</button>
+            <button onClick={handlerChange} className='sort-result__item'>
+              release data
+            </button>
           </li>
           <li>
-            <button onClick={handlerChange} className="sort-result__item sort-result--active">rating</button>
+            <button
+              onClick={handlerChange}
+              className='sort-result__item sort-result--active'
+            >
+              rating
+            </button>
           </li>
         </ul>
       </div>

@@ -28,7 +28,7 @@ const SearchOption = (props: IProps) => {
     const eventTarget = event.target as HTMLElement;
 
     switchColor(event)
-    props.typeSwitcher(eventTarget.innerText)
+    props.typeSwitcher(eventTarget.innerText.toLowerCase())
   }
 
   return (

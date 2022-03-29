@@ -1,8 +1,13 @@
 const getGenreOutput = (item: string[]) => {
   return item.length > 2 ? item.join(', ') : item.join(' & ')
 }
-const matchedMovies = (searchType: string, searchInput: string, data: Array<object>, filterOption: string = 'rating') => {
-  let matched
+const matchedMovies = (
+  searchType: string,
+  searchInput: string,
+  data: Array<object>,
+  filterOption: string = 'rating'
+) => {
+  let matched: Array<object> = []
 
   if (searchType === 'title') {
     matched = data.filter((item: any) =>
@@ -16,27 +21,29 @@ const matchedMovies = (searchType: string, searchInput: string, data: Array<obje
     )
   }
 
-  const  compareByDate = ( a:any, b:any ) => {
-    if ( b.releaseDate < a.releaseDate ){
-      return -1;
+  const compareByDate = (a: any, b: any) => {
+    if (b.releaseDate < a.releaseDate) {
+      return -1
     }
-    if ( b.releaseDate > a.releaseDate ){
-      return 1;
+    if (b.releaseDate > a.releaseDate) {
+      return 1
     }
-    return 0;
+    return 0
   }
 
-  const  compareByRating = ( a:any, b:any ) => {
-    if ( b.rating < a.rating ){
-      return -1;
+  const compareByRating = (a: any, b: any) => {
+    if (b.rating < a.rating) {
+      return -1
     }
-    if ( b.rating > a.rating ){
-      return 1;
+    if (b.rating > a.rating) {
+      return 1
     }
-    return 0;
+    return 0
   }
-  
-  return matched?.sort(filterOption === 'rating' ? compareByRating : compareByDate)
+  console.log(matched);
+  return matched?.sort(
+    filterOption === 'rating' ? compareByRating : compareByDate
+  )
 }
 
 export { getGenreOutput, matchedMovies }

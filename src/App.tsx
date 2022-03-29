@@ -1,10 +1,6 @@
 import { useState } from 'react'
 import { MainPage, ViewPage, ErrorBoundary } from './containers/'
-
-type stateType = {
-  page: string;
-  movieId: string;
-}
+import { stateType } from './models/interfaces'
 
 export default function App() {
   const [page, setPage] = useState({

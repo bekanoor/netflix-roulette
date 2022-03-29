@@ -1,9 +1,5 @@
 import React from 'react'
-
-type stateType = {
-  page: string
-  movieId: string
-}
+import { stateType } from '../../models/interfaces'
 
 interface IProps {
   cover: string
@@ -15,10 +11,10 @@ interface IProps {
 }
 
 const FilmCard = (props: IProps) => {
-  const { onChangePage, cover, filmTitle, genre, releaseDate, id} = props
+  const { onChangePage, cover, filmTitle, genre, releaseDate, id } = props
 
-  const handelChangePage = (e: React.MouseEvent<HTMLDivElement>) => {
-    const id = e.currentTarget.id
+  const handelChangePage = (event: React.MouseEvent<HTMLDivElement>) => {
+    const id = event.currentTarget.id
     if (onChangePage) onChangePage({ page: 'view', movieId: id })
   }
 

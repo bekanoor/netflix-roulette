@@ -2,11 +2,7 @@ import data from '../../Data/data'
 import { Footer, FilmCard } from '../'
 import { getGenreOutput } from '../../models/functions'
 import React from 'react'
-
-type stateType = {
-  page: string
-  movieId: string
-}
+import { stateType } from '../../models/interfaces'
 
 interface IProps {
   onChangePage: (value: stateType) => void
@@ -47,7 +43,12 @@ const ViewPage = (props: IProps) => {
             />
           </div>
           <div className='header-view__info'>
-            <h1 className='main-title'>{data[parsedId].filmTitle} <button className='header-view__score'>{data[parsedId].rating}</button></h1>
+            <h1 className='main-title'>
+              {data[parsedId].filmTitle}{' '}
+              <button className='header-view__score'>
+                {data[parsedId].rating}
+              </button>
+            </h1>
             <p className='header-view__genres primary-text'>
               {data[parsedId].genre.join(', ')}
             </p>
@@ -89,4 +90,4 @@ const ViewPage = (props: IProps) => {
   )
 }
 
-export default React.memo(ViewPage) 
+export default React.memo(ViewPage)
