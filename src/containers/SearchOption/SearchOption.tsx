@@ -4,7 +4,8 @@ interface IProps {
 
 const SearchOption = (props: IProps) => {
   const switchColor = (event: React.MouseEvent<HTMLElement>) => {
-    if (event.currentTarget.classList.contains('option-list__button--active')) {
+    const eventTarget = event.currentTarget as HTMLElement;
+    if (eventTarget.classList.contains('option-list__button--active')) {
       return
     }
 
@@ -23,14 +24,11 @@ const SearchOption = (props: IProps) => {
     }
   }
 
-  const handleChangeTitle = (e: any) => {
-    switchColor(e)
-    props.typeSwitcher('title')
-  }
+  const handlerChange = (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+    const eventTarget = event.target as HTMLElement;
 
-  const handleChangeGenre = (e: any) => {
-    switchColor(e)
-    props.typeSwitcher('genre')
+    switchColor(event)
+    props.typeSwitcher(eventTarget.innerText)
   }
 
   return (
@@ -41,14 +39,14 @@ const SearchOption = (props: IProps) => {
         </li>
         <li className='option-list__item'>
           <button
-            onClick={handleChangeTitle}
+            onClick={handlerChange}
             className='option-list__button option-list__button--active'
           >
             title
           </button>
         </li>
         <li className='option-list__item'>
-          <button onClick={handleChangeGenre} className='option-list__button'>
+          <button onClick={handlerChange} className='option-list__button'>
             genre
           </button>
         </li>

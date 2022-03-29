@@ -9,11 +9,9 @@
     display: flex;
     justify-content: space-between;
   }
-  &__image-container {
-    height: 468px;
-  }
   &__image {
-    height: auto;
+    height: 468px;
+    width: 328px;
   }
   &__info {
     padding: 0 58px;

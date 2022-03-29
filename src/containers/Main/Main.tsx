@@ -1,10 +1,14 @@
 import { Props } from 'react'
 import { FilmCard } from '../'
-import { getGenreOutput } from '../functions'
+import { getGenreOutput } from '../../models/functions'
 
 type stateType = {
   page: string
   movieId: string
+}
+
+type typesItem = {
+  cover: string;
 }
 
 interface IProps {

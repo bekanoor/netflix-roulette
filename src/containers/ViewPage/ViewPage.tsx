@@ -1,6 +1,7 @@
 import data from '../../Data/data'
 import { Footer, FilmCard } from '../'
-import { getGenreOutput } from '../functions'
+import { getGenreOutput } from '../../models/functions'
+import React from 'react'
 
 type stateType = {
   page: string
@@ -88,4 +89,4 @@ const ViewPage = (props: IProps) => {
   )
 }
 
-export { ViewPage }
+export default React.memo(ViewPage) 

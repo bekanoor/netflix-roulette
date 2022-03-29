@@ -8,7 +8,7 @@ type stateType = {
 interface IProps {
   cover: string
   filmTitle: string
-  releaseDate: string
+  releaseDate: number
   genre: string
   id: string
   onChangePage: (value: stateType) => void

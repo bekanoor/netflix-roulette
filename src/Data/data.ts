@@ -3,14 +3,14 @@ import Image2 from '../assets/images/Bohemian-Rhapsody.jpg'
 import Image3 from '../assets/images/Kill-Bill-Vol-2.jpg'
 import Image4 from '../assets/images/Avengers-War-of-Infinity.jpg'
 import Image5 from '../assets/images/Inception.jpg'
-import Image6 from '../assets/images/Reservoir-dogs.jpg'
+import Image6 from '../assets/images/Kill-Bill-Vol-1.jpg'
 
 const data = [
   {
     "rating": 4.5,
     "filmTitle": "Pulp Fiction",
     "genre": ["Action", "Adventure"],
-    "releaseDate": "1994",
+    "releaseDate": 1994,
     "cover": Image,
     "duration": "154 min",
     "id": 0,
@@ -18,9 +18,9 @@ const data = [
   },
   {
     "rating": 4.3,
-    "filmTitle": "Bohemian Rhapsody",
+    "filmTitle": "pu Bohemian Rhapsody",
     "genre": ["Drama", "Biography", "Music"],
-    "releaseDate": "2018",
+    "releaseDate": 2018,
     "cover": Image2,
     "duration": "133 min",
     "id": 1,
@@ -30,7 +30,7 @@ const data = [
     "rating": 4.7,
     "filmTitle": "Kill Bill: Vol 2",
     "genre": ["Oscar winning Movie"],
-    "releaseDate": "2004",
+    "releaseDate": 2004,
     "cover": Image3,
     "duration": "134 min",
     "id": 2,
@@ -40,7 +40,7 @@ const data = [
     "rating": 3.5,
     "filmTitle": "Avengers: War of Infinity",
     "genre": ["Action", "Adventure"],
-    "releaseDate": "2018",
+    "releaseDate": 2018,
     "cover": Image4,
     "duration": "153 min",
     "id": 3,
@@ -50,21 +50,21 @@ const data = [
     "rating": 4.2,
     "filmTitle": "Inception",
     "genre": ["Action", "Adventure"],
-    "releaseDate": "2010",
+    "releaseDate": 2010,
     "cover": Image5,
     "duration": "158 min",
     "id": 4,
     "description": "A thief who steals corporate secrets through the use of dream-sharing technology is given the inverse task of planting an idea into the mind of a C.E.O., but his tragic past may doom the project and his team to disaster."
   },
   {
-    "rating": 3.9,
-    "filmTitle": "Reservoir dogs",
+    "rating": 4.9,
+    "filmTitle": "Kill Bill: Vol. 1",
     "genre": ["Oscar winning Movie"],
-    "releaseDate": "1992",
+    "releaseDate": 2003,
     "cover": Image6,
-    "duration": "98 min",
+    "duration": "120 min",
     "id": 5,
-    "description": "When a simple jewelry heist goes horribly wrong, the surviving criminals begin to suspect that one of them is a police informant."
+    "description": "After awakening from a four-year coma, a former assassin wreaks vengeance on the team of assassins who betrayed her."
   }
 ]
 

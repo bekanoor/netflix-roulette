@@ -1,6 +1,8 @@
+import React from 'react'
 import { useEffect, useState } from 'react'
-import { Header, Main, Footer, NoMatches } from '../'
+import { Header, Main, Footer, NoMatches, SortResult } from '../'
 import Data from '../../Data/data'
+import { matchedMovies } from '../../models/functions'
 
 type stateType = {
   page: string
@@ -16,7 +18,7 @@ const MainPage = (props: IProps) => {
   const [searchInput, setSearchInput] = useState('')
   const [searchType, setSearchType] = useState('title')
   const [searchButton, setSearchButton] = useState('disable')
-
+  const [filterType, setFilterType] = useState('rating')
   useEffect(() => {
     setTimeout(() => {
       const requestData: object[] = Data
@@ -24,26 +26,12 @@ const MainPage = (props: IProps) => {
     }, 42)
   }, [data])
 
-  const matchedMovies = () => {
-    let matched
-
-    if (searchType === 'title') {
-      matched = data.filter((item: any) =>
-        item.filmTitle.toLowerCase().startsWith(searchInput)
-      )
-    }
-
-    if (searchType === 'genre') {
-      matched = data.filter((item: any) =>
-        item.genre.join(' ').toLowerCase().includes(searchInput)
-      )
-    }
-
-    return matched
-  }
-
   const handleSetSearch = (value: string) => {
     setSearchButton(value)
+  }
+
+  const handleFilterType = (value: string) => {
+    setFilterType(value)
   }
 
   const handleInputChange = (value: string) => {
@@ -54,7 +42,7 @@ const MainPage = (props: IProps) => {
     setSearchType(value)
   }
 
-  const computedData = matchedMovies()
+  const computedData = matchedMovies(searchType, searchInput, Data, filterType)
 
   if (searchButton === 'active' && searchInput.length) {
     return (
@@ -66,6 +54,10 @@ const MainPage = (props: IProps) => {
           input={searchInput}
           searchType={searchType}
         ></Header>
+        <SortResult
+          onClick={handleFilterType}
+          movieLength={computedData?.length}
+        ></SortResult>
         {computedData!.length > 0 ? (
           <Main
             movies={computedData as Array<object>}
@@ -100,4 +92,4 @@ const MainPage = (props: IProps) => {
   )
 }
 
-export { MainPage }
+export default React.memo(MainPage)
