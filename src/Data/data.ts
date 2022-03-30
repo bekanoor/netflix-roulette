@@ -47,7 +47,7 @@ const data = [
     "description": "The Avengers and their allies must be willing to sacrifice all in an attempt to defeat the powerful Thanos before his blitz of devastation and ruin puts an end to the universe."
   },
   {
-    "rating": 4.2,
+    "rating": 3.3,
     "filmTitle": "Inception",
     "genre": ["Action", "Adventure"],
     "releaseDate": 2010,
