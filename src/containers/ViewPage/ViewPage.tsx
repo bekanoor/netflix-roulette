@@ -1,6 +1,6 @@
 import data from '../../Data/data'
 import { Footer, FilmCard } from '../'
-import { getGenreOutput } from '../../models/functions'
+import { getGenreOutput } from '../utils/functions'
 import React from 'react'
 import { stateType } from '../../models/interfaces'
 

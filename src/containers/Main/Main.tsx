@@ -1,5 +1,5 @@
 import { FilmCard } from '../'
-import { getGenreOutput } from '../../models/functions'
+import { getGenreOutput } from '../utils/functions'
 import { stateType, moviesType } from '../../models/interfaces'
 
 interface IProps {

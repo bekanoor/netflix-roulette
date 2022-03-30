@@ -1,8 +1,8 @@
-import React from 'react'
+import React, { useCallback, useMemo } from 'react'
 import { useEffect, useState } from 'react'
 import { Header, Main, Footer, NoMatches, SortResult } from '../'
 import Data from '../../Data/data'
-import { matchedMovies } from '../../models/functions'
+import { matchedMovies } from '../utils/functions'
 import { stateType, moviesType } from '../../models/interfaces'
 
 interface IProps {
@@ -15,6 +15,7 @@ const MainPage = (props: IProps) => {
   const [searchType, setSearchType] = useState('title')
   const [searchButton, setSearchButton] = useState('disable')
   const [filterType, setFilterType] = useState('rating')
+
   useEffect(() => {
     setTimeout(() => {
       const requestData: Array<moviesType> = Data
@@ -22,23 +23,40 @@ const MainPage = (props: IProps) => {
     }, 42)
   }, [data])
 
-  const handleSetSearch = (value: string) => {
-    setSearchButton(value)
-  }
+  const handleSetSearch = useCallback(
+    (value) => {
+      setSearchButton(value)
+    },
+    [searchInput]
+  )
 
-  const handleFilterType = (value: string) => {
-    setFilterType(value)
-  }
+  const handleFilterType = useCallback(
+    (value) => {
+      setFilterType(value)
+    },
+    [filterType]
+  )
 
-  const handleInputChange = (value: string) => {
-    setSearchInput(value)
-  }
+  const handleInputChange = useCallback(
+    (value) => {
+      setSearchInput(value)
+    },
+    [searchInput]
+  )
 
-  const handleSearchType = (value: string) => {
-    setSearchType(value)
-  }
+  const handleSearchType = useCallback(
+    (value) => {
+      setSearchType(value)
+    },
+    [searchType]
+  )
 
-  const computedData = matchedMovies(searchType, searchInput, Data, filterType)
+  const computedData = useMemo(
+    () => matchedMovies(searchType, searchInput, Data, filterType),
+    [searchType, searchInput, filterType]
+  )
+
+  const footer = useMemo(() => <Footer></Footer>, [])
 
   if (searchButton === 'active' && searchInput.length) {
     return (
@@ -62,7 +80,7 @@ const MainPage = (props: IProps) => {
         ) : (
           <NoMatches></NoMatches>
         )}
-        <Footer></Footer>
+        {footer}
       </div>
     )
   }
