@@ -7,7 +7,7 @@ interface Props {
 }
 
 interface Theme {
-  blank: themeType
+  dark: themeType
   danger: themeType
   warning: themeType
   white: themeType
@@ -19,7 +19,7 @@ type themeType = {
 }
 
 const themeOption = {
-  blank: {
+  dark: {
     standard: 'rgba(96, 96, 96, 0.68)',
     hover: ' rgba(96, 96, 96, 1);',
   },
@@ -76,7 +76,7 @@ const colorOption = {
 const Button = styled.button<Props>`
   font-family: Montserrat, sans-serif;
   font-weight: 500;
-  background-color: ${({theme = 'danger'}: Props) => themeOption[theme].standard};
+  background-color: ${({theme = 'danger'}: Props) => themeOption[theme]?.standard};
   width: ${({size = 'standard'}: Props) => sizeOption[size].width};
   height: ${({size = 'standard'}: Props) => sizeOption[size].height};
   color: ${({color = 'white'}: Props) => colorOption[color]};
@@ -87,7 +87,7 @@ const Button = styled.button<Props>`
   transition: ease background-color 300ms;
 
   &:hover {
-    background-color: ${({theme = 'danger'}: Props) => themeOption[theme].hover};
+    background-color: ${({theme = 'danger'}: Props) => themeOption[theme]?.standard};
   }
 `
 export default Button
