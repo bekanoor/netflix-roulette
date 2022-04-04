@@ -2,8 +2,8 @@ import React, { useCallback, useMemo } from 'react'
 import { useEffect, useState } from 'react'
 import { Header, Main, Footer, NoMatches, SortResult } from '../'
 import Data from '../../Data/data'
-import { matchedMovies } from '../utils/functions'
-import { stateType, moviesType } from '../../models/interfaces'
+import { matchedMovies } from '../utils/'
+import { stateType, moviesType } from '../../models/'
 
 interface IProps {
   onChangePage: (value: stateType) => void
@@ -67,7 +67,7 @@ const MainPage = (props: IProps) => {
           setSearch={handleSetSearch}
           input={searchInput}
           searchType={searchType}
-        ></Header>
+        />
         <SortResult
           onClick={handleFilterType}
           movieLength={computedData?.length}
@@ -91,13 +91,11 @@ const MainPage = (props: IProps) => {
 
   return (
     <div className='wrapper'>
-      <Header
-        inputOnChange={handleInputChange}
+      <Header inputOnChange={handleInputChange}
         typeSwitcher={handleSearchType}
         setSearch={handleSetSearch}
         input={searchInput}
-        searchType={searchType}
-      ></Header>
+        searchType={searchType}/>
       {data.length > 1 && (
         <Main movies={data} onChangePage={props.onChangePage}></Main>
       )}

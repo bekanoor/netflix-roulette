@@ -1,3 +1,4 @@
+import React from 'react'
 import { Button } from '../../components'
 import { SearchOption } from '../SearchOption'
 
@@ -9,17 +10,22 @@ interface IProps {
   input: string;
 }
 
-const Header = (props: IProps) => {
-  const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    props.inputOnChange(event.target.value.toLocaleLowerCase())
+class Header extends React.Component<IProps>{
+  constructor(props: IProps) {
+    super(props)
   }
 
-  const buttonHandler = () => {
-    props.setSearch('active');
+  handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    this.props.inputOnChange(event.target.value.toLocaleLowerCase())
   }
 
-  return (
-    <header className='header'>
+  buttonHandler = () => {
+    this.props.setSearch('active');
+  }
+
+  render() {
+    return (
+      <header className='header'>
       <p className='header__logo'>
         netflix
         <span className='header__logo header__logo-regular'>roulette</span>
@@ -27,7 +33,7 @@ const Header = (props: IProps) => {
       <h1 className='main-title'>FIND YOUR MOVIE</h1>
       <div>
         <input
-          onChange={handleInputChange}
+          onChange={this.handleInputChange}
           className='input-search header__input'
           placeholder='What do you want to watch?'
         ></input>
@@ -36,18 +42,19 @@ const Header = (props: IProps) => {
           theme='danger'
           size='standard'
           color='white'
-          onClick={buttonHandler}
+          onClick={this.buttonHandler}
         >
           SEARCH
         </Button>
       </div>
       <div className='header__search-option'>
         <SearchOption
-          typeSwitcher={props.typeSwitcher}
+          typeSwitcher={this.props.typeSwitcher}
         ></SearchOption>
       </div>
     </header>
-  )
+      )
+  }
 }
 
-export default Header
+export { Header }

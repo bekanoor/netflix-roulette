@@ -1,5 +1,5 @@
 import React from 'react'
-import { stateType } from '../../models/interfaces'
+import { stateType } from '../../models'
 
 interface IProps {
   cover: string
