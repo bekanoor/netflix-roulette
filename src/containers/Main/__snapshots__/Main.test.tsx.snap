@@ -1,0 +1,45 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`test main should render main correctly 1`] = `
+<div>
+  <main
+    class="movies-wrapper"
+    data-testid="main-test"
+  >
+    <div
+      class="film-card"
+      data-testid="film-card-test"
+      id="2"
+    >
+      <div
+        class="film-card__image-container"
+      >
+        <img
+          alt="image"
+          class="film-card__image"
+          src="../assets/images/Kill-Bill-Vol-2.jpg"
+        />
+      </div>
+      <div
+        class="film-card__title-container"
+      >
+        <p
+          class="film-card__title"
+        >
+          Kill Bill: Vol 2
+        </p>
+        <button
+          class="film-card__release-date"
+        >
+          2004
+        </button>
+      </div>
+      <p
+        class="film-card__genre"
+      >
+        Oscar winning Movie
+      </p>
+    </div>
+  </main>
+</div>
+`;

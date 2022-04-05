@@ -1,0 +1,39 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`test search option component should render search option correctly 1`] = `
+<div>
+  <nav
+    data-testid="search-option-test"
+  >
+    <ul
+      class="option-list"
+    >
+      <li
+        class="option-list__item"
+      >
+        <p>
+          search by
+        </p>
+      </li>
+      <li
+        class="option-list__item"
+      >
+        <button
+          class="option-list__button option-list__button--active"
+        >
+          title
+        </button>
+      </li>
+      <li
+        class="option-list__item"
+      >
+        <button
+          class="option-list__button"
+        >
+          genre
+        </button>
+      </li>
+    </ul>
+  </nav>
+</div>
+`;

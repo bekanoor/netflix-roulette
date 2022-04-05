@@ -1,0 +1,41 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`test search result component should render search result correctly 1`] = `
+<div>
+  <div
+    class="sort-result"
+    data-testid="sort-result-test"
+  >
+    <p
+      class="sort-result__text"
+    >
+       movies found
+    </p>
+    <div>
+      <ul
+        class="sort-result__list"
+      >
+        <li
+          class="sort-result__text"
+        >
+          Sort by
+        </li>
+        <li>
+          <button
+            class="sort-result__item"
+          >
+            release data
+          </button>
+        </li>
+        <li>
+          <button
+            class="sort-result__item sort-result--active"
+          >
+            rating
+          </button>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
+`;

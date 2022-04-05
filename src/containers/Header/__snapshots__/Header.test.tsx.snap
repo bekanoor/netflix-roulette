@@ -1,0 +1,75 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`test header should render header correctly 1`] = `
+<div>
+  <header
+    class="header"
+    data-testid="header-test"
+  >
+    <p
+      class="header__logo"
+    >
+      netflix
+      <span
+        class="header__logo header__logo-regular"
+      >
+        roulette
+      </span>
+    </p>
+    <h1
+      class="main-title"
+    >
+      FIND YOUR MOVIE
+    </h1>
+    <div>
+      <input
+        class="input-search header__input"
+        placeholder="What do you want to watch?"
+      />
+      <button
+        class="sc-bczRLJ borxYo header__search-btn"
+        color="white"
+      >
+        SEARCH
+      </button>
+    </div>
+    <div
+      class="header__search-option"
+    >
+      <nav
+        data-testid="search-option-test"
+      >
+        <ul
+          class="option-list"
+        >
+          <li
+            class="option-list__item"
+          >
+            <p>
+              search by
+            </p>
+          </li>
+          <li
+            class="option-list__item"
+          >
+            <button
+              class="option-list__button option-list__button--active"
+            >
+              title
+            </button>
+          </li>
+          <li
+            class="option-list__item"
+          >
+            <button
+              class="option-list__button"
+            >
+              genre
+            </button>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+</div>
+`;

@@ -4,7 +4,7 @@ interface IProps {
 
 const SearchOption = (props: IProps) => {
   const switchColor = (event: React.MouseEvent<HTMLElement>) => {
-    const eventTarget = event.currentTarget as HTMLElement;
+    const eventTarget = event.currentTarget as HTMLElement
     if (eventTarget.classList.contains('option-list__button--active')) {
       return
     }
@@ -24,15 +24,17 @@ const SearchOption = (props: IProps) => {
     }
   }
 
-  const handlerChange = (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
-    const eventTarget = event.target as HTMLElement;
+  const handlerChange = (
+    event: React.MouseEvent<HTMLButtonElement, MouseEvent>
+  ) => {
+    const eventTarget = event.target as HTMLElement
 
     switchColor(event)
     props.typeSwitcher(eventTarget.innerText.toLowerCase())
   }
 
   return (
-    <nav>
+    <nav data-testid='search-option-test'>
       <ul className='option-list'>
         <li className='option-list__item'>
           <p>search by</p>

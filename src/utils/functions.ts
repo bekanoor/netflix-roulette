@@ -1,6 +1,7 @@
 const getGenreOutput = (item: string[]) => {
   return item.length > 2 ? item.join(', ') : item.join(' & ')
 }
+
 const matchedMovies = (
   searchType: string,
   searchInput: string,
@@ -40,7 +41,7 @@ const matchedMovies = (
     }
     return 0
   }
-  console.log(matched);
+
   return matched?.sort(
     filterOption === 'rating' ? compareByRating : compareByDate
   )

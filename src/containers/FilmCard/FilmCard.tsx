@@ -19,7 +19,12 @@ const FilmCard = (props: IProps) => {
   }
 
   return (
-    <div className='film-card' onClick={handelChangePage} id={id}>
+    <div
+      className='film-card'
+      onClick={handelChangePage}
+      id={id}
+      data-testid='film-card-test'
+    >
       <div className='film-card__image-container'>
         <img className='film-card__image' src={cover} alt='image'></img>
       </div>

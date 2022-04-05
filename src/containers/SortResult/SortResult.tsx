@@ -38,7 +38,7 @@ const SortResult = (props: IProps) => {
   }
 
   return (
-    <div className='sort-result'>
+    <div className='sort-result' data-testid='sort-result-test'>
       <p className='sort-result__text'>{movieLength} movies found</p>
       <div>
         <ul className='sort-result__list'>
