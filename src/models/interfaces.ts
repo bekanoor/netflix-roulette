@@ -1,14 +1,17 @@
 type stateType = {
   page: string
-  movieId: string
+  movieId: number
 }
 
 type moviesType = {
-  cover: string
-  filmTitle: string
-  releaseDate: number
+  poster_path: string
+  title: string
+  release_date: string
   id: number
-  genre: string[]
+  genres: string[]
+  vote_average: number
+  runtime: number
+  overview: string
 }
 
 export type { stateType, moviesType }

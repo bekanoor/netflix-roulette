@@ -1,19 +1,29 @@
+import { moviesType } from 'src/models'
 import { getGenreOutput, matchedMovies } from './'
 
-const data = [
-  {
-    rating: 4.3,
-    filmTitle: 'pu Bohemian Rhapsody',
-    genre: ['Drama', 'Biography', 'Music'],
-    releaseDate: 2018,
-  },
-  {
-    rating: 4.5,
-    filmTitle: 'Pulp Fiction',
-    genre: ['Action', 'Adventure'],
-    releaseDate: 1994,
-  },
-]
+const data:Array<moviesType> = 
+  [
+    { 
+      "vote_average": 3.7,
+      "title": "Kill Bill: Vol 3",
+      "genres": ["Oscar winning Movie"],
+      "release_date": "2005-12-12",
+      "poster_path": '../assets/images/Kill-Bill-Vol-2.jpg',
+      "runtime": 132,
+      "id": 3,
+      "overview": "The Bride continues her quest of vengeance against her former boss and lover Bill, the reclusive bouncer Budd, and the treacherous, one-eyed Elle."
+    },
+    { 
+      "vote_average": 4.7,
+      "title": "Kill Bill: Vol 2",
+      "genres": ["Oscar winning Movie"],
+      "release_date": "2004-12-12",
+      "poster_path": '../assets/images/Kill-Bill-Vol-2.jpg',
+      "runtime": 132,
+      "id": 2,
+      "overview": "The Bride continues her quest of vengeance against her former boss and lover Bill, the reclusive bouncer Budd, and the treacherous, one-eyed Elle."
+    }
+  ]
 
 describe('test util', () => {
   test('test genre behave', () => {
@@ -26,44 +36,81 @@ describe('test util', () => {
     expect(getGenreOutput(case3)).toBe('Action, Music, Adventure')
   })
 
-  test('test matched movie func by title', () => {
-    const rightResult: any = [
-      {
-        rating: 4.5,
-        filmTitle: 'Pulp Fiction',
-        genre: ['Action', 'Adventure'],
-        releaseDate: 1994,
+  test('test matched movie func by title and rating', () => {
+    const rightResult = [
+      { 
+        "vote_average": 4.7,
+        "title": "Kill Bill: Vol 2",
+        "genres": ["Oscar winning Movie"],
+        "release_date": "2004-12-12",
+        "poster_path": '../assets/images/Kill-Bill-Vol-2.jpg',
+        "runtime": 132,
+        "id": 2,
+        "overview": "The Bride continues her quest of vengeance against her former boss and lover Bill, the reclusive bouncer Budd, and the treacherous, one-eyed Elle."
       },
-      {
-        rating: 4.3,
-        filmTitle: 'pu Bohemian Rhapsody',
-        genre: ['Drama', 'Biography', 'Music'],
-        releaseDate: 2018,
+      { 
+        "vote_average": 3.7,
+        "title": "Kill Bill: Vol 3",
+        "genres": ["Oscar winning Movie"],
+        "release_date": "2005-12-12",
+        "poster_path": '../assets/images/Kill-Bill-Vol-2.jpg',
+        "runtime": 132,
+        "id": 3,
+        "overview": "The Bride continues her quest of vengeance against her former boss and lover Bill, the reclusive bouncer Budd, and the treacherous, one-eyed Elle."
       }
     ]
 
     const wrongResult = [
-      {
-        rating: 4.3,
-        filmTitle: 'pu Bohemian Rhapsody',
-        genre: ['Drama', 'Biography', 'Music'],
-        releaseDate: 2018,
+      { 
+        "vote_average": 3.7,
+        "title": "Kill Bill: Vol 3",
+        "genres": ["Oscar winning Movie"],
+        "release_date": "2005-12-12",
+        "poster_path": '../assets/images/Kill-Bill-Vol-2.jpg',
+        "runtime": 132,
+        "id": 3,
+        "overview": "The Bride continues her quest of vengeance against her former boss and lover Bill, the reclusive bouncer Budd, and the treacherous, one-eyed Elle."
       },
-      {
-        rating: 4.5,
-        filmTitle: 'Pulp Fiction',
-        genre: ['Action', 'Adventure'],
-        releaseDate: 1994,
+      { 
+        "vote_average": 4.7,
+        "title": "Kill Bill: Vol 2",
+        "genres": ["Oscar winning Movie"],
+        "release_date": "2004-12-12",
+        "poster_path": '../assets/images/Kill-Bill-Vol-2.jpg',
+        "runtime": 132,
+        "id": 2,
+        "overview": "The Bride continues her quest of vengeance against her former boss and lover Bill, the reclusive bouncer Budd, and the treacherous, one-eyed Elle."
       }
     ]
 
-    expect(matchedMovies('title', 'pu', data, 'rating')).toEqual(rightResult)
-    expect(matchedMovies('title', 'pu', data, 'rating')).not.toEqual(wrongResult)
+    expect(matchedMovies('title', 'ki', data, 'rating')).toEqual(rightResult)
+    expect(matchedMovies('title', 'ki', data, 'rating')).not.toEqual(wrongResult)
   })
 
-  // test('test matched movie func by genre', () => {
-  //   const searchTypeG = 'genre'
+  test('test matched movie func by genre and release date', () => {
+    const rightResult = [
+      { 
+        "vote_average": 3.7,
+        "title": "Kill Bill: Vol 3",
+        "genres": ["Oscar winning Movie"],
+        "release_date": "2005-12-12",
+        "poster_path": '../assets/images/Kill-Bill-Vol-2.jpg',
+        "runtime": 132,
+        "id": 3,
+        "overview": "The Bride continues her quest of vengeance against her former boss and lover Bill, the reclusive bouncer Budd, and the treacherous, one-eyed Elle."
+      },
+      { 
+        "vote_average": 4.7,
+        "title": "Kill Bill: Vol 2",
+        "genres": ["Oscar winning Movie"],
+        "release_date": "2004-12-12",
+        "poster_path": '../assets/images/Kill-Bill-Vol-2.jpg',
+        "runtime": 132,
+        "id": 2,
+        "overview": "The Bride continues her quest of vengeance against her former boss and lover Bill, the reclusive bouncer Budd, and the treacherous, one-eyed Elle."
+      }
+    ]
 
-  //   expect(matchedMovies(searchTypeG,)).toBe()
-  // })
+    expect(matchedMovies('title', 'ki', data, 'release date')).toEqual(rightResult)
+  })
 })

@@ -8,9 +8,9 @@ describe('test film card', () => {
       <FilmCard
         cover=''
         filmTitle=''
-        releaseDate={1}
+        releaseDate='2018'
         genre=''
-        id=''
+        id={0}
         onChangePage={() => {}}
       />
     )
@@ -23,9 +23,9 @@ describe('test film card', () => {
       <FilmCard
         cover=''
         filmTitle=''
-        releaseDate={1}
+        releaseDate='2018'
         genre=''
-        id=''
+        id={0}
         onChangePage={() => {}}
       />
     )

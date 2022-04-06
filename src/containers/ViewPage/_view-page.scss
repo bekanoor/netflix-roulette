@@ -9,6 +9,10 @@
     display: flex;
     justify-content: space-between;
   }
+  &__image-container {
+    width: 328px;
+    height: 478px;
+  }
   &__image {
     height: 468px;
     width: 328px;

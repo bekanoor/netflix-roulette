@@ -4,9 +4,9 @@ import { stateType } from '../../models'
 interface IProps {
   cover: string
   filmTitle: string
-  releaseDate: number
+  releaseDate: string
   genre: string
-  id: string
+  id: number
   onChangePage: (value: stateType) => void
 }
 
@@ -14,15 +14,18 @@ const FilmCard = (props: IProps) => {
   const { onChangePage, cover, filmTitle, genre, releaseDate, id } = props
 
   const handelChangePage = (event: React.MouseEvent<HTMLDivElement>) => {
-    const id = event.currentTarget.id
-    if (onChangePage) onChangePage({ page: 'view', movieId: id })
+    
+    const id = +event.currentTarget.id
+    console.log(id + ' card id');
+
+    if (onChangePage) onChangePage({page: 'view', movieId: id})
   }
 
   return (
     <div
       className='film-card'
       onClick={handelChangePage}
-      id={id}
+      id={id.toString()}
       data-testid='film-card-test'
     >
       <div className='film-card__image-container'>

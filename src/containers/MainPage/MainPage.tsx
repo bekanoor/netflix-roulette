@@ -1,27 +1,19 @@
 import React, { useCallback, useMemo } from 'react'
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { Header, Main, Footer, NoMatches, SortResult } from '../'
-import Data from '../../Data/data'
 import { matchedMovies } from '../../utils'
 import { stateType, moviesType } from '../../models/'
 
 interface IProps {
+  data: Array<moviesType>
   onChangePage: (value: stateType) => void
 }
 
 const MainPage = (props: IProps) => {
-  const [data, setData] = useState<Array<moviesType>>([])
   const [searchInput, setSearchInput] = useState('')
   const [searchType, setSearchType] = useState('title')
   const [searchButton, setSearchButton] = useState('disable')
   const [filterType, setFilterType] = useState('rating')
-
-  useEffect(() => {
-    setTimeout(() => {
-      const requestData: Array<moviesType> = Data
-      setData(requestData)
-    }, 42)
-  }, [data])
 
   const handleSetSearch = useCallback(
     (value) => {
@@ -52,7 +44,7 @@ const MainPage = (props: IProps) => {
   )
 
   const computedData = useMemo(
-    () => matchedMovies(searchType, searchInput, Data, filterType),
+    () => matchedMovies(searchType, searchInput, props.data, filterType),
     [searchType, searchInput, filterType]
   )
 
@@ -94,8 +86,8 @@ const MainPage = (props: IProps) => {
         typeSwitcher={handleSearchType}
         setSearch={handleSetSearch}
       />
-      {data.length > 1 && (
-        <Main movies={data} onChangePage={props.onChangePage}></Main>
+      {props.data.length > 1 && (
+        <Main movies={props.data} onChangePage={props.onChangePage}></Main>
       )}
       <Footer></Footer>
     </div>

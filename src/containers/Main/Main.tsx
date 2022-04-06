@@ -8,20 +8,22 @@ interface IProps {
 }
 
 const Main = (props: IProps) => {
+  console.log(props.movies);
+  
   return (
     <main className='movies-wrapper' data-testid='main-test'>
       {props.movies.map((item) => {
-        const { cover, filmTitle, releaseDate, id, genre } = item
-        const genreResult = getGenreOutput(genre)
+        const { poster_path, title, release_date, id, genres } = item
+        const genreResult = getGenreOutput(genres)
 
         return (
           <FilmCard
-            id={id.toString()}
+            id={id}
             key={id}
             onChangePage={props.onChangePage}
-            cover={cover}
-            filmTitle={filmTitle}
-            releaseDate={releaseDate}
+            cover={poster_path}
+            filmTitle={title}
+            releaseDate={release_date.substring(0, 4)}
             genre={genreResult}
           ></FilmCard>
         )

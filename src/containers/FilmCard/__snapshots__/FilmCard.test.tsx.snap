@@ -5,7 +5,7 @@ exports[`test film card should render film card correctly 1`] = `
   <div
     class="film-card"
     data-testid="film-card-test"
-    id=""
+    id="0"
   >
     <div
       class="film-card__image-container"
@@ -25,7 +25,7 @@ exports[`test film card should render film card correctly 1`] = `
       <button
         class="film-card__release-date"
       >
-        1
+        2018
       </button>
     </div>
     <p

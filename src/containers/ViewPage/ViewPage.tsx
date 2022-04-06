@@ -1,4 +1,3 @@
-import data from '../../Data/data'
 import { Footer, FilmCard } from '..'
 import { getGenreOutput } from '../../utils/functions'
 import React from 'react'
@@ -6,7 +5,8 @@ import { stateType, moviesType } from '../../models/interfaces'
 
 interface IProps {
   onChangePage: (value: stateType) => void
-  movieId: string
+  movieId: number
+  data: Array<moviesType>
 }
 
 class ViewPage extends React.Component<IProps> {
@@ -14,18 +14,18 @@ class ViewPage extends React.Component<IProps> {
     super(props)
   }
 
-  private movieId: string = this.props.movieId
-  private parsedId: number = parseInt(this.movieId)
-  private movieGenres: string[] = data[this.parsedId].genre
-
+  private movieId: number = this.props.movieId
+  private movieGenres: any = this.props.data.find((item)=> item.id === this.movieId)
+  private chosenMovie: any = this.props.data.find(item => item.id === this.movieId);
+  
   sameGenreMovie = (): moviesType[] => {
-    return data.filter((item) => {
-      return item.genre.includes(this.movieGenres[0])
+    return this.props.data.filter((item) => {
+      return item.genres.includes(this.movieGenres.genres[0])
     })
   }
 
   handleChangeMainPage = () => {
-    this.props.onChangePage({ page: 'main', movieId: '0' })
+    this.props.onChangePage({ page: 'main', movieId: 0 })
   }
 
   render() {
@@ -34,7 +34,7 @@ class ViewPage extends React.Component<IProps> {
         <header className='header-view'>
           <div className='header-view__nav'>
             <p className='header__logo'>
-              netflix
+              netflix{console.log(this.movieId + " view id ")}
               <span className='header__logo header__logo-regular'>
                 roulette
               </span>
@@ -50,48 +50,48 @@ class ViewPage extends React.Component<IProps> {
             <div className='header-view__image-container'>
               <img
                 className='header-view__image'
-                src={data[this.parsedId].cover}
+                src={this.chosenMovie.poster_path}
                 alt='image-movie'
               />
             </div>
             <div className='header-view__info'>
               <h1 className='main-title'>
-                {data[this.parsedId].filmTitle}{' '}
+                {this.chosenMovie.title}{' '}
                 <button className='header-view__score'>
-                  {data[this.parsedId].rating}
+                  {this.chosenMovie.vote_average}
                 </button>
               </h1>
               <p className='header-view__genres primary-text'>
-                {data[this.parsedId].genre.join(', ')}
+                {this.chosenMovie.genres.join(', ')}
               </p>
               <div className='header-view__movie-details'>
                 <p className='header-view__movie-details-text'>
-                  {getGenreOutput(data[this.parsedId].genre)}
+                  {getGenreOutput(this.chosenMovie.genres)}
                 </p>
                 <p className='header-view__movie-details-text'>
-                  {data[this.parsedId].duration}
+                  {this.chosenMovie.runtime} min
                 </p>
               </div>
               <p className='primary-text header-view__description'>
-                {data[this.parsedId].description}
+                {this.chosenMovie.overview}
               </p>
             </div>
           </div>
           <div className='header-view__movie-with-same-genre'>
-            Films by {this.movieGenres.join(', ')} genre
+            Films by {this.movieGenres.genres.join(', ')} genre
           </div>
         </header>
         <main className='movies-wrapper'>
           {this.sameGenreMovie().map((item) => {
-            const { cover, genre, filmTitle, releaseDate } = item
+            const { poster_path, genres, title, release_date } = item
             return (
               <FilmCard
-                key={item.id.toString()}
-                cover={cover}
-                genre={getGenreOutput(genre)}
-                filmTitle={filmTitle}
-                releaseDate={releaseDate}
-                id={item.id.toString()}
+                key={item.id}
+                cover={poster_path}
+                genre={getGenreOutput(genres)}
+                filmTitle={title}
+                releaseDate={release_date.substring(0, 4)}
+                id={item.id}
                 onChangePage={this.props.onChangePage}
               />
             )
@@ -103,4 +103,4 @@ class ViewPage extends React.Component<IProps> {
   }
 }
 
-export { ViewPage }
+export default React.memo(ViewPage)
