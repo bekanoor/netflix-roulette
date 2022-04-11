@@ -1,12 +1,13 @@
 import React from 'react'
+import { useDispatch } from 'react-redux'
 
 interface IProps {
   movieLength?: number
-  onClick: (value: string) => void
 }
 
 const SortResult = (props: IProps) => {
-  const { movieLength, onClick } = props
+  const { movieLength } = props
+  const dispatch = useDispatch()
 
   const switchColor = (event: React.MouseEvent<HTMLButtonElement>): void => {
     const eventTarget = event.currentTarget as HTMLElement
@@ -34,7 +35,7 @@ const SortResult = (props: IProps) => {
   ): void => {
     const eventTarget = event.target as HTMLElement
     switchColor(event)
-    onClick(eventTarget.innerText)
+    dispatch({ type: 'SET_FILTER_TYPE', payload: eventTarget.innerText })
   }
 
   return (

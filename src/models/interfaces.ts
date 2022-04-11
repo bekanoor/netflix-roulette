@@ -1,6 +1,20 @@
-type stateType = {
-  page: string
-  movieId: number
+type actionType = {
+  type: string
+  payload: any
+}
+
+type stateTypes = {
+  searchType: string
+  filterType: string
+  searchInput: string
+  searchButton: string
+  data: {
+    data: Array<moviesType>
+  }
+  page: {
+    page: string
+    movieId: number
+  }
 }
 
 type moviesType = {
@@ -14,4 +28,4 @@ type moviesType = {
   overview: string
 }
 
-export type { stateType, moviesType }
+export type { moviesType, stateTypes, actionType }

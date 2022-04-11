@@ -3,9 +3,7 @@ import { Button } from '../../components'
 import { SearchOption } from '../SearchOption'
 
 interface IProps {
-  inputOnChange: (value: string) => void
-  typeSwitcher: (value: string) => void
-  setSearch: (input: string) => void
+  dispatch: (value: object) => void
 }
 
 class Header extends React.Component<IProps> {
@@ -14,11 +12,14 @@ class Header extends React.Component<IProps> {
   }
 
   handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    this.props.inputOnChange(event.target.value.toLocaleLowerCase())
+    this.props.dispatch({
+      type: 'SET_SEARCH_INPUT',
+      payload: event.target.value.toLocaleLowerCase(),
+    })
   }
 
   buttonHandler = () => {
-    this.props.setSearch('active')
+    this.props.dispatch({ type: 'SET_SEARCH_BUTTON', payload: 'active' })
   }
 
   render() {
@@ -46,7 +47,7 @@ class Header extends React.Component<IProps> {
           </Button>
         </div>
         <div className='header__search-option'>
-          <SearchOption typeSwitcher={this.props.typeSwitcher}></SearchOption>
+          <SearchOption></SearchOption>
         </div>
       </header>
     )

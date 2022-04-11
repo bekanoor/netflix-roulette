@@ -1,4 +1,4 @@
-import { moviesType } from "src/models"
+import { moviesType } from 'src/models'
 
 const getGenreOutput = (item: string[]) => {
   return item.length > 2 ? item.join(', ') : item.join(' & ')
@@ -19,11 +19,12 @@ const matchedMovies = (
   }
 
   if (searchType === 'genre') {
-    
     matched = data.filter((item) => {
-    console.log(item.genres);
-
-    return  item.genres.join(' ').toLowerCase().split(' ').includes(searchInput)
+      return item.genres
+        .join(' ')
+        .toLowerCase()
+        .split(' ')
+        .includes(searchInput)
     })
   }
 

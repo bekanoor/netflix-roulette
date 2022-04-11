@@ -1,6 +1,6 @@
 import { render, screen } from '@testing-library/react'
 import '@testing-library/jest-dom'
-import { NoMatches } from './NoMatches'
+import { NoMatches } from '../NoMatches'
 
 describe('test no matches component', () => {
   test('should render no matches correctly', () => {

@@ -1,15 +1,12 @@
 import { FilmCard } from '../'
 import { getGenreOutput } from '../../utils'
-import { stateType, moviesType } from '../../models'
+import { moviesType } from '../../models'
 
 interface IProps {
   movies: Array<moviesType>
-  onChangePage: (value: stateType) => void
 }
 
 const Main = (props: IProps) => {
-  console.log(props.movies);
-  
   return (
     <main className='movies-wrapper' data-testid='main-test'>
       {props.movies.map((item) => {
@@ -20,7 +17,6 @@ const Main = (props: IProps) => {
           <FilmCard
             id={id}
             key={id}
-            onChangePage={props.onChangePage}
             cover={poster_path}
             filmTitle={title}
             releaseDate={release_date.substring(0, 4)}

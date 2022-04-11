@@ -2,46 +2,19 @@ import React, { useCallback, useMemo } from 'react'
 import { useState } from 'react'
 import { Header, Main, Footer, NoMatches, SortResult } from '../'
 import { matchedMovies } from '../../utils'
-import { stateType, moviesType } from '../../models/'
+import { moviesType, stateTypes } from '../../models/'
+import { useDispatch, useSelector } from 'react-redux'
 
 interface IProps {
   data: Array<moviesType>
-  onChangePage: (value: stateType) => void
 }
 
 const MainPage = (props: IProps) => {
-  const [searchInput, setSearchInput] = useState('')
-  const [searchType, setSearchType] = useState('title')
-  const [searchButton, setSearchButton] = useState('disable')
-  const [filterType, setFilterType] = useState('rating')
-
-  const handleSetSearch = useCallback(
-    (value) => {
-      setSearchButton(value)
-    },
-    [searchInput]
-  )
-
-  const handleFilterType = useCallback(
-    (value) => {
-      setFilterType(value)
-    },
-    [filterType]
-  )
-
-  const handleInputChange = useCallback(
-    (value) => {
-      setSearchInput(value)
-    },
-    [searchInput]
-  )
-
-  const handleSearchType = useCallback(
-    (value) => {
-      setSearchType(value)
-    },
-    [searchType]
-  )
+  const searchType = useSelector((state: stateTypes) => state.searchType)
+  const filterType = useSelector((state: stateTypes) => state.filterType)
+  const searchInput = useSelector((state: stateTypes) => state.searchInput)
+  const searchButton = useSelector((state: stateTypes) => state.searchButton)
+  const dispatch = useDispatch()
 
   const computedData = useMemo(
     () => matchedMovies(searchType, searchInput, props.data, filterType),
@@ -53,20 +26,10 @@ const MainPage = (props: IProps) => {
   if (searchButton === 'active' && searchInput.length) {
     return (
       <div className='wrapper'>
-        <Header
-          inputOnChange={handleInputChange}
-          typeSwitcher={handleSearchType}
-          setSearch={handleSetSearch}
-        />
-        <SortResult
-          onClick={handleFilterType}
-          movieLength={computedData?.length}
-        ></SortResult>
+        <Header dispatch={dispatch} />
+        <SortResult movieLength={computedData?.length}></SortResult>
         {computedData!.length > 0 ? (
-          <Main
-            movies={computedData as Array<moviesType>}
-            onChangePage={props.onChangePage}
-          ></Main>
+          <Main movies={computedData as Array<moviesType>}></Main>
         ) : (
           <NoMatches></NoMatches>
         )}
@@ -76,19 +39,13 @@ const MainPage = (props: IProps) => {
   }
 
   if (searchButton === 'active') {
-    setSearchButton('disable')
+    dispatch({ type: 'SET_SEARCH_BUTTON', payload: 'disable' })
   }
 
   return (
     <div className='wrapper'>
-      <Header
-        inputOnChange={handleInputChange}
-        typeSwitcher={handleSearchType}
-        setSearch={handleSetSearch}
-      />
-      {props.data.length > 1 && (
-        <Main movies={props.data} onChangePage={props.onChangePage}></Main>
-      )}
+      <Header dispatch={dispatch} />
+      {props.data.length > 1 && <Main movies={props.data}></Main>}
       <Footer></Footer>
     </div>
   )

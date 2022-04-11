@@ -1,20 +1,26 @@
 import { render } from '@testing-library/react'
-import { Header } from './Header'
+import { Header } from '../Header'
 import '@testing-library/jest-dom'
+import { Provider } from 'react-redux'
+import { store } from '../../../store'
 
 describe('test header', () => {
-  const mockF = (value: string): void => {}
+  const mockF = (value: object): void => {}
 
   test('should render header correctly', () => {
     const { container } = render(
-      <Header inputOnChange={mockF} typeSwitcher={mockF} setSearch={mockF} />
+      <Provider store={store}>
+        <Header dispatch={mockF} />
+      </Provider>
     )
     expect(container).toMatchSnapshot()
   })
 
   test('dom elements really exist', () => {
     const { getByTestId } = render(
-      <Header inputOnChange={mockF} typeSwitcher={mockF} setSearch={mockF} />
+      <Provider store={store}>
+        <Header dispatch={mockF} />
+      </Provider>
     )
 
     expect(getByTestId('header-test')).toBeInTheDocument()

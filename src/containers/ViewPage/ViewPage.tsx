@@ -1,12 +1,12 @@
 import { Footer, FilmCard } from '..'
 import { getGenreOutput } from '../../utils/functions'
 import React from 'react'
-import { stateType, moviesType } from '../../models/interfaces'
+import { moviesType } from '../../models/interfaces'
 
 interface IProps {
-  onChangePage: (value: stateType) => void
   movieId: number
   data: Array<moviesType>
+  onClick: (value: object) => void
 }
 
 class ViewPage extends React.Component<IProps> {
@@ -15,9 +15,13 @@ class ViewPage extends React.Component<IProps> {
   }
 
   private movieId: number = this.props.movieId
-  private movieGenres: any = this.props.data.find((item)=> item.id === this.movieId)
-  private chosenMovie: any = this.props.data.find(item => item.id === this.movieId);
-  
+  private movieGenres: any = this.props.data.find(
+    (item) => item.id === this.movieId
+  )
+  private chosenMovie: any = this.props.data.find(
+    (item) => item.id === this.movieId
+  )
+
   sameGenreMovie = (): moviesType[] => {
     return this.props.data.filter((item) => {
       return item.genres.includes(this.movieGenres.genres[0])
@@ -25,7 +29,10 @@ class ViewPage extends React.Component<IProps> {
   }
 
   handleChangeMainPage = () => {
-    this.props.onChangePage({ page: 'main', movieId: 0 })
+    this.props.onClick({
+      type: 'SET_MOVIE_PAGE',
+      payload: { page: 'main', movieId: 0 },
+    })
   }
 
   render() {
@@ -34,7 +41,7 @@ class ViewPage extends React.Component<IProps> {
         <header className='header-view'>
           <div className='header-view__nav'>
             <p className='header__logo'>
-              netflix{console.log(this.movieId + " view id ")}
+              netflix{console.log(this.movieId + ' view id ')}
               <span className='header__logo header__logo-regular'>
                 roulette
               </span>
@@ -92,7 +99,6 @@ class ViewPage extends React.Component<IProps> {
                 filmTitle={title}
                 releaseDate={release_date.substring(0, 4)}
                 id={item.id}
-                onChangePage={this.props.onChangePage}
               />
             )
           })}

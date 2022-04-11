@@ -1,5 +1,5 @@
 import React from 'react'
-import { stateType } from '../../models'
+import { useDispatch } from 'react-redux'
 
 interface IProps {
   cover: string
@@ -7,18 +7,16 @@ interface IProps {
   releaseDate: string
   genre: string
   id: number
-  onChangePage: (value: stateType) => void
 }
 
 const FilmCard = (props: IProps) => {
-  const { onChangePage, cover, filmTitle, genre, releaseDate, id } = props
+  const { cover, filmTitle, genre, releaseDate, id } = props
+  const dispatch = useDispatch()
 
   const handelChangePage = (event: React.MouseEvent<HTMLDivElement>) => {
-    
     const id = +event.currentTarget.id
-    console.log(id + ' card id');
 
-    if (onChangePage) onChangePage({page: 'view', movieId: id})
+    dispatch({ type: 'SET_MOVIE_PAGE', payload: { page: 'view', movieId: id } })
   }
 
   return (

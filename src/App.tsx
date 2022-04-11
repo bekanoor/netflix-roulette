@@ -1,42 +1,49 @@
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 import { MainPage, ViewPage, ErrorBoundary } from './containers/'
-import { stateType } from './models/interfaces'
+import { stateTypes } from './models/interfaces'
 
 export default function App() {
-  const [data, setData] = useState({data: []})
+  const dispatch = useDispatch()
 
-  const [page, setPage] = useState({
-    page: 'main',
-    movieId: 0,
-  })
+  const data = useSelector((state: stateTypes) => state.data)
+  const page = useSelector((state: stateTypes) => state.page)
 
   useEffect(() => {
     const fetchData = async () => {
-      const url = 'http://react-cdp-api.herokuapp.com/movies?searchBy=genres'
-      const data = await fetch(url);
-      const json = await data.json();
+      try {
+        const url = 'http://react-cdp-api.herokuapp.com/movies?searchBy=genres'
+        const data = await fetch(url)
+        const json = await data.json()
 
-      setData(json)
+        dispatch({ type: 'GET_DATA', payload: json })
+      } catch (error) {
+        console.log(error)
+      }
     }
 
-    fetchData().catch(console.error)
+    fetchData()
   }, [])
 
-  const handleChangePage = (obj: stateType) => {
-    setPage(obj)
+  const handleChangePage = (obj: object) => {
+    dispatch(obj)
   }
-  console.log(page.movieId + ' app id')
-  return (
-    <ErrorBoundary>
-      {page.page === 'main' ? (
-        <MainPage onChangePage={handleChangePage} data={data.data}></MainPage>
-      ) : (
+  
+  if(page.page === 'view') {
+    return (
+      <ErrorBoundary>
         <ViewPage
+          onClick={handleChangePage}
           movieId={page.movieId}
-          onChangePage={handleChangePage}
           data={data.data}
         ></ViewPage>
-      )}
+      </ErrorBoundary>
+    )
+  }
+
+  return (
+    <ErrorBoundary>
+      <MainPage data={data.data}></MainPage>
     </ErrorBoundary>
   )
 }

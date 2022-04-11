@@ -1,8 +1,8 @@
-interface IProps {
-  typeSwitcher: (value: string) => void
-}
+import { useDispatch } from 'react-redux'
 
-const SearchOption = (props: IProps) => {
+const SearchOption = () => {
+  const dispatch = useDispatch()
+
   const switchColor = (event: React.MouseEvent<HTMLElement>) => {
     const eventTarget = event.currentTarget as HTMLElement
     if (eventTarget.classList.contains('option-list__button--active')) {
@@ -30,7 +30,10 @@ const SearchOption = (props: IProps) => {
     const eventTarget = event.target as HTMLElement
 
     switchColor(event)
-    props.typeSwitcher(eventTarget.innerText.toLowerCase())
+    dispatch({
+      type: 'SET_SEARCH_TYPE',
+      payload: eventTarget.innerText.toLowerCase(),
+    })
   }
 
   return (

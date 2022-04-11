@@ -1,5 +1,5 @@
 import { moviesType } from 'src/models'
-import { getGenreOutput, matchedMovies } from './'
+import { getGenreOutput, matchedMovies } from '..'
 
 const data:Array<moviesType> = 
   [
