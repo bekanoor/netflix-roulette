@@ -9,12 +9,12 @@ type stateTypes = {
   searchInput: string
   searchButton: string
   data: {
-    data: Array<moviesType>
+    data: Array<Movie>
   }
   movieID: number
 }
 
-type moviesType = {
+type Movie = {
   poster_path: string
   title: string
   release_date: string
@@ -23,10 +23,10 @@ type moviesType = {
   vote_average: number
   runtime: number
   overview: string
-  budget: number
-  revenue: number
-  tagline: string
-  vote_count: number
+  budget?: number
+  revenue?: number
+  tagline?: string
+  vote_count?: number
 }
 
-export type { moviesType, stateTypes, actionType }
+export type { Movie, stateTypes, actionType }
