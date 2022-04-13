@@ -10,14 +10,14 @@ interface IProps {
 }
 
 const ViewPage = (props: IProps) => {
+  const { data } = props
   const movieID = useSelector((state: stateTypes) => state.movieID)
-  const chosenMovie: moviesType = props.data.find(
-    (item) => item.id === movieID
-  )!
-
-  const sameGenreMovie = (): moviesType[] =>
-    props.data.filter(item =>
-      item.genres.every(element => chosenMovie.genres.includes(element))
+  const selectedMovie: moviesType = data.find((item) => item.id === movieID)!
+  
+  const hasGenre = (item: string) => selectedMovie.genres.includes(item)
+  const getMoviesBySelectedGenres = (): moviesType[] =>
+    data.filter(({genres}) =>
+      genres.every(hasGenre)
     )
 
   return (
@@ -36,39 +36,39 @@ const ViewPage = (props: IProps) => {
           <div className='header-view__image-container'>
             <img
               className='header-view__image'
-              src={chosenMovie.poster_path}
+              src={selectedMovie.poster_path}
               alt='image-movie'
             />
           </div>
           <div className='header-view__info'>
             <h1 className='main-title'>
-              {chosenMovie.title}{' '}
+              {selectedMovie.title}{' '}
               <button className='header-view__score'>
-                {chosenMovie.vote_average}
+                {selectedMovie.vote_average}
               </button>
             </h1>
             <p className='header-view__genres primary-text'>
-              {chosenMovie.genres.join(', ')}
+              {selectedMovie.genres.join(', ')}
             </p>
             <div className='header-view__movie-details'>
               <p className='header-view__movie-details-text'>
-                {getGenreOutput(chosenMovie.genres)}
+                {getGenreOutput(selectedMovie.genres)}
               </p>
               <p className='header-view__movie-details-text'>
-                {chosenMovie.runtime} min
+                {selectedMovie.runtime} min
               </p>
             </div>
             <p className='primary-text header-view__description'>
-              {chosenMovie.overview}
+              {selectedMovie.overview}
             </p>
           </div>
         </div>
         <div className='header-view__movie-with-same-genre'>
-          Films by {chosenMovie.genres.join(', ')} genre
+          Films by {selectedMovie.genres.join(', ')} genre
         </div>
       </header>
       <main className='movies-wrapper'>
-        {sameGenreMovie().map((item) => {
+        {getMoviesBySelectedGenres().map((item) => {
           const { poster_path, genres, title, release_date } = item
           return (
             <FilmCard
