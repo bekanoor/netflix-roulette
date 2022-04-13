@@ -6,7 +6,7 @@ interface IProps {
   cover: string
   filmTitle: string
   releaseDate: string
-  genre: string
+  genre: string | undefined
   id: number
 }
 

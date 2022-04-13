@@ -1,3 +1,3 @@
-import { getGenreOutput, matchedMovies } from './functions'
+import { getGenreOutput, matchedMovies, findMovie } from './functions'
 
-export { getGenreOutput, matchedMovies };
+export { getGenreOutput, matchedMovies, findMovie };
