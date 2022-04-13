@@ -1,12 +1,11 @@
-import React, { useCallback, useMemo } from 'react'
-import { useState } from 'react'
+import React, { useMemo } from 'react'
 import { Header, Main, Footer, NoMatches, SortResult } from '../'
 import { matchedMovies } from '../../utils'
-import { moviesType, stateTypes } from '../../models/'
+import { Movie, stateTypes } from '../../models/'
 import { useDispatch, useSelector } from 'react-redux'
 
 interface IProps {
-  data: Array<moviesType>
+  data: Array<Movie>
 }
 
 const MainPage = (props: IProps) => {
@@ -29,7 +28,7 @@ const MainPage = (props: IProps) => {
         <Header dispatch={dispatch} />
         <SortResult movieLength={computedData?.length}></SortResult>
         {computedData!.length > 0 ? (
-          <Main movies={computedData as Array<moviesType>}></Main>
+          <Main movies={computedData as Array<Movie>}></Main>
         ) : (
           <NoMatches></NoMatches>
         )}

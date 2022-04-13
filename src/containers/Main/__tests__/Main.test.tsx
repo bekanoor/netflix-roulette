@@ -1,11 +1,12 @@
 import { render } from '@testing-library/react'
-import { moviesType } from 'src/models'
+import { Movie } from 'src/models'
 import Main from '../Main'
 import '@testing-library/jest-dom'
 import { Provider } from 'react-redux'
 import { store } from '../../../store'
+import { BrowserRouter } from 'react-router-dom'
 
-const data: Array<moviesType> = [
+const data: Array<Movie> = [
   {
     vote_average: 4.7,
     title: 'Kill Bill: Vol 2',
@@ -22,18 +23,22 @@ const data: Array<moviesType> = [
 describe('test main', () => {
   test('should render main correctly', () => {
     const { container } = render(
-      <Provider store={store}>
-        <Main movies={data} />
-      </Provider>
+      <BrowserRouter>
+        <Provider store={store}>
+          <Main movies={data} />
+        </Provider>
+      </BrowserRouter>
     )
     expect(container).toMatchSnapshot()
   })
 
   test('dom elements really exist', () => {
     const { getByTestId } = render(
-      <Provider store={store}>
-        <Main movies={data} />
-      </Provider>
+      <BrowserRouter>
+        <Provider store={store}>
+          <Main movies={data} />
+        </Provider>
+      </BrowserRouter>
     )
     expect(getByTestId('main-test')).toBeInTheDocument()
   })

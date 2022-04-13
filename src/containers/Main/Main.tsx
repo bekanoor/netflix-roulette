@@ -1,15 +1,16 @@
 import { FilmCard } from '../'
 import { getGenreOutput } from '../../utils'
-import { moviesType } from '../../models'
+import { Movie } from '../../models'
 
 interface IProps {
-  movies: Array<moviesType>
+  movies: Array<Movie>
 }
 
 const Main = (props: IProps) => {
+  const { movies } = props
   return (
     <main className='movies-wrapper' data-testid='main-test'>
-      {props.movies.map((item) => {
+      {movies.map((item) => {
         const { poster_path, title, release_date, id, genres } = item
         const genreResult = getGenreOutput(genres)
 

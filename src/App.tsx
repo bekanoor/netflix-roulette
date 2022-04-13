@@ -2,7 +2,7 @@ import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { MainPage, ViewPage, ErrorBoundary } from './containers/'
 import { stateTypes } from './models/interfaces'
-import { Routes, Route, Link, BrowserRouter } from 'react-router-dom'
+import { Routes, Route, BrowserRouter } from 'react-router-dom'
 import { NoPageFound } from './containers/NoPageFound'
 
 export default function App() {
@@ -36,7 +36,7 @@ export default function App() {
               path='/view-page/*'
               element={
                 <ViewPage
-                  data={data.data}
+                  movies={data.data}
                 />
               }
             />

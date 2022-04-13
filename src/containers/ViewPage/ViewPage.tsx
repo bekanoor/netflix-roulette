@@ -1,24 +1,23 @@
 import { Footer, FilmCard } from '..'
 import { getGenreOutput } from '../../utils/functions'
-import React from 'react'
-import { moviesType, stateTypes } from '../../models/interfaces'
+import React, { useMemo } from 'react'
+import { Movie, stateTypes } from '../../models/interfaces'
 import { Link } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 
 interface IProps {
-  data: Array<moviesType>
+  movies: Array<Movie>
 }
 
-const ViewPage = (props: IProps) => {
-  const { data } = props
+const ViewPage = ({ movies }: IProps) => {
   const movieID = useSelector((state: stateTypes) => state.movieID)
-  const selectedMovie: moviesType = data.find((item) => item.id === movieID)!
-  
+  const selectedMovie: Movie = movies.find((item) => item.id === movieID)!
+
   const hasGenre = (item: string) => selectedMovie.genres.includes(item)
-  const getMoviesBySelectedGenres = (): moviesType[] =>
-    data.filter(({genres}) =>
-      genres.every(hasGenre)
-    )
+  const getMovies = (): Movie[] =>
+    movies.filter(({ genres }) => genres.every(hasGenre))
+
+  const memoizedMovies = useMemo(() => getMovies(), [movies])
 
   return (
     <div className='wrapper'>
@@ -68,7 +67,7 @@ const ViewPage = (props: IProps) => {
         </div>
       </header>
       <main className='movies-wrapper'>
-        {getMoviesBySelectedGenres().map((item) => {
+        {memoizedMovies.map((item) => {
           const { poster_path, genres, title, release_date } = item
           return (
             <FilmCard

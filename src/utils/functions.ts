@@ -1,4 +1,4 @@
-import { moviesType } from 'src/models'
+import { Movie } from 'src/models'
 
 const getGenreOutput = (item: string[]) => {
   return item.length > 2 ? item.join(', ') : item.join(' & ')
@@ -7,7 +7,7 @@ const getGenreOutput = (item: string[]) => {
 const matchedMovies = (
   searchType: string,
   searchInput: string,
-  data: Array<moviesType>,
+  data: Array<Movie>,
   filterOption: string = 'rating'
 ) => {
   let matched: Array<object> = []
