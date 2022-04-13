@@ -2,13 +2,14 @@ import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { MainPage, ViewPage, ErrorBoundary } from './containers/'
 import { stateTypes } from './models/interfaces'
+import { Routes, Route, Link, BrowserRouter } from 'react-router-dom'
+import { NoPageFound } from './containers/NoPageFound'
 
 export default function App() {
   const dispatch = useDispatch()
 
   const data = useSelector((state: stateTypes) => state.data)
-  const page = useSelector((state: stateTypes) => state.page)
-
+  
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -25,25 +26,24 @@ export default function App() {
     fetchData()
   }, [])
 
-  const handleChangePage = (obj: object) => {
-    dispatch(obj)
-  }
-  
-  if(page.page === 'view') {
-    return (
-      <ErrorBoundary>
-        <ViewPage
-          onClick={handleChangePage}
-          movieId={page.movieId}
-          data={data.data}
-        ></ViewPage>
-      </ErrorBoundary>
-    )
-  }
-
   return (
-    <ErrorBoundary>
-      <MainPage data={data.data}></MainPage>
-    </ErrorBoundary>
+    <>
+      <ErrorBoundary>
+        <BrowserRouter>
+          <Routes>
+            <Route path='/' element={<MainPage data={data.data} />} />
+            <Route
+              path='/view-page/*'
+              element={
+                <ViewPage
+                  data={data.data}
+                />
+              }
+            />
+            <Route path='*' element={<NoPageFound/>}/>
+          </Routes>
+        </BrowserRouter>
+      </ErrorBoundary>
+    </>
   )
 }

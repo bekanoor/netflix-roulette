@@ -8,10 +8,7 @@ const defaultState: stateTypes = {
   data: {
     data: [],
   },
-  page: {
-    page: 'main',
-    movieId: 0,
-  },
+  movieID: 0
 }
 
 const reducer = (state: stateTypes = defaultState, action: actionType) => {
@@ -27,7 +24,7 @@ const reducer = (state: stateTypes = defaultState, action: actionType) => {
     case 'GET_DATA':
       return { ...state, data: action.payload }
     case 'SET_MOVIE_PAGE':
-      return { ...state, page: action.payload }
+      return { ...state, movieID: action.payload }
     default:
       return state
   }

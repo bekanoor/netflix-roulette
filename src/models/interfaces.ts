@@ -11,10 +11,7 @@ type stateTypes = {
   data: {
     data: Array<moviesType>
   }
-  page: {
-    page: string
-    movieId: number
-  }
+  movieID: number
 }
 
 type moviesType = {
@@ -26,6 +23,10 @@ type moviesType = {
   vote_average: number
   runtime: number
   overview: string
+  budget: number
+  revenue: number
+  tagline: string
+  vote_count: number
 }
 
 export type { moviesType, stateTypes, actionType }
