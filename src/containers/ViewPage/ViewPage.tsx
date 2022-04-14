@@ -1,24 +1,28 @@
 import { Footer, FilmCard } from '..'
-import { getGenreOutput } from '../../utils/functions'
+import { findMovie, getGenreOutput } from '../../utils'
 import React, { useMemo } from 'react'
 import { Movie, stateTypes } from '../../models/interfaces'
 import { Link } from 'react-router-dom'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 
 interface IProps {
   movies: Array<Movie>
 }
 
 const ViewPage = ({ movies }: IProps) => {
-  const movieID = useSelector((state: stateTypes) => state.movieID)
-  const selectedMovie: Movie = movies.find((item) => item.id === movieID)!
+  const dispatch = useDispatch()
+  const handleClick = () => dispatch({ type: 'SET_SEARCH_INPUT', payload: '' })
 
-  const hasGenre = (item: string) => selectedMovie.genres.includes(item)
+  const movieID = useSelector((state: stateTypes) => state.movieID)
+  const selectedMovie: Array<Movie>  = findMovie(movieID, movies)
+
+  const hasGenre = (item: string) => selectedMovie[0].genres.includes(item)
   const getMovies = (): Movie[] =>
     movies.filter(({ genres }) => genres.every(hasGenre))
 
   const memoizedMovies = useMemo(() => getMovies(), [movies])
-
+  console.log(selectedMovie[0].poster_path);
+  
   return (
     <div className='wrapper'>
       <header className='header-view'>
@@ -28,42 +32,44 @@ const ViewPage = ({ movies }: IProps) => {
             <span className='header__logo header__logo-regular'>roulette</span>
           </p>
           <Link to='/'>
-            <button className='search-button'>SEARCH</button>
+            <button onClick={handleClick} className='search-button'>
+              SEARCH
+            </button>
           </Link>
         </div>
         <div className='header-view__wrapper'>
           <div className='header-view__image-container'>
             <img
               className='header-view__image'
-              src={selectedMovie.poster_path}
+              src={selectedMovie[0].poster_path}
               alt='image-movie'
             />
           </div>
           <div className='header-view__info'>
             <h1 className='main-title'>
-              {selectedMovie.title}{' '}
+              {selectedMovie[0].title}{' '}
               <button className='header-view__score'>
-                {selectedMovie.vote_average}
+                {selectedMovie[0].vote_average}
               </button>
             </h1>
             <p className='header-view__genres primary-text'>
-              {selectedMovie.genres.join(', ')}
+              {selectedMovie[0].genres.join(', ')}
             </p>
             <div className='header-view__movie-details'>
               <p className='header-view__movie-details-text'>
-                {getGenreOutput(selectedMovie.genres)}
+                ?{getGenreOutput(selectedMovie[0].genres)}
               </p>
               <p className='header-view__movie-details-text'>
-                {selectedMovie.runtime} min
+                {selectedMovie[0].runtime} min
               </p>
             </div>
             <p className='primary-text header-view__description'>
-              {selectedMovie.overview}
+              {selectedMovie[0].overview}
             </p>
           </div>
         </div>
         <div className='header-view__movie-with-same-genre'>
-          Films by {selectedMovie.genres.join(', ')} genre
+          Films by {selectedMovie[0].genres.join(', ')} genre
         </div>
       </header>
       <main className='movies-wrapper'>
@@ -87,3 +93,6 @@ const ViewPage = ({ movies }: IProps) => {
 }
 
 export default React.memo(ViewPage)
+function dispatch(): React.MouseEventHandler<HTMLButtonElement> | undefined {
+  throw new Error('Function not implemented.')
+}
