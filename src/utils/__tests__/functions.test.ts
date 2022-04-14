@@ -25,6 +25,7 @@ const movies: Array<Movie> = [
       'The Bride continues her quest of vengeance against her former boss and lover Bill, the reclusive bouncer Budd, and the treacherous, one-eyed Elle.',
   },
 ]
+
 describe('test util', () => {
   test('test genre behave', () => {
     const case1 = ['Action']

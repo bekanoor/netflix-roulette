@@ -14,14 +14,15 @@ const ViewPage = ({ movies }: IProps) => {
   const handleClick = () => dispatch({ type: 'SET_SEARCH_INPUT', payload: '' })
 
   const movieID = useSelector((state: stateTypes) => state.movieID)
-  const selectedMovie: Movie | undefined = findMovie(movieID, movies)
+  const selectedMovie: Array<Movie>  = findMovie(movieID, movies)
 
-  const hasGenre = (item: string) => selectedMovie?.genres.includes(item)
+  const hasGenre = (item: string) => selectedMovie[0].genres.includes(item)
   const getMovies = (): Movie[] =>
     movies.filter(({ genres }) => genres.every(hasGenre))
 
   const memoizedMovies = useMemo(() => getMovies(), [movies])
-
+  console.log(selectedMovie[0].poster_path);
+  
   return (
     <div className='wrapper'>
       <header className='header-view'>
@@ -40,35 +41,35 @@ const ViewPage = ({ movies }: IProps) => {
           <div className='header-view__image-container'>
             <img
               className='header-view__image'
-              src={selectedMovie?.poster_path}
+              src={selectedMovie[0].poster_path}
               alt='image-movie'
             />
           </div>
           <div className='header-view__info'>
             <h1 className='main-title'>
-              {selectedMovie?.title}{' '}
+              {selectedMovie[0].title}{' '}
               <button className='header-view__score'>
-                {selectedMovie?.vote_average}
+                {selectedMovie[0].vote_average}
               </button>
             </h1>
             <p className='header-view__genres primary-text'>
-              {selectedMovie?.genres.join(', ')}
+              {selectedMovie[0].genres.join(', ')}
             </p>
             <div className='header-view__movie-details'>
               <p className='header-view__movie-details-text'>
-                ?{getGenreOutput(selectedMovie?.genres)}
+                ?{getGenreOutput(selectedMovie[0].genres)}
               </p>
               <p className='header-view__movie-details-text'>
-                {selectedMovie?.runtime} min
+                {selectedMovie[0].runtime} min
               </p>
             </div>
             <p className='primary-text header-view__description'>
-              {selectedMovie?.overview}
+              {selectedMovie[0].overview}
             </p>
           </div>
         </div>
         <div className='header-view__movie-with-same-genre'>
-          Films by {selectedMovie?.genres.join(', ')} genre
+          Films by {selectedMovie[0].genres.join(', ')} genre
         </div>
       </header>
       <main className='movies-wrapper'>

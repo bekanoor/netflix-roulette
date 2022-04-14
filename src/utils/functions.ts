@@ -1,7 +1,8 @@
 import { Movie } from 'src/models'
 
+
 const getGenreOutput = (item: string[] | undefined) => {
-  if(item === undefined) return
+  if (item === undefined) return
   return item.length > 2 ? item.join(', ') : item.join(' & ')
 }
 
@@ -55,11 +56,9 @@ const matchedMovies = (
 }
 
 const findMovie = (movieID: number, movies: Array<Movie>) => {
-  if(typeof movieID !== 'number') return 
-  if(!Array.isArray(movies)) return
-  if(movies.length < 1) return
+  const result: any = movies.find(({ id }) => id === movieID)
 
-  return movies.find(({id}) => id === movieID)
+  return result ? [result] : []
 }
 
 export { getGenreOutput, matchedMovies, findMovie }
