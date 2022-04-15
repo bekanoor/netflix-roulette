@@ -126,7 +126,7 @@ describe('test util', () => {
   })
 
   test('test selected movie with valid values', () => {
-    const rightResult = {
+    const rightResult = [{
       vote_average: 3.7,
       title: 'Kill Bill: Vol 3',
       genres: ['Oscar winning Movie'],
@@ -136,7 +136,7 @@ describe('test util', () => {
       id: 3,
       overview:
         'The Bride continues her quest of vengeance against her former boss and lover Bill, the reclusive bouncer Budd, and the treacherous, one-eyed Elle.',
-    }
+    }]
 
     expect(findMovie(3, movies)).toEqual(rightResult)
   })
