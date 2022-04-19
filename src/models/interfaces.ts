@@ -11,7 +11,6 @@ type stateTypes = {
   data: {
     data: Array<Movie>
   }
-  movieID: number[]
 }
 
 type Movie = {

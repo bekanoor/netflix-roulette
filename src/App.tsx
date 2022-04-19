@@ -9,7 +9,7 @@ export default function App() {
   const dispatch = useDispatch()
 
   const data = useSelector((state: stateTypes) => state.data)
-  
+
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -32,15 +32,8 @@ export default function App() {
         <BrowserRouter>
           <Routes>
             <Route path='/' element={<MainPage data={data.data} />} />
-            <Route
-              path='/view-page/*'
-              element={
-                <ViewPage
-                  movies={data.data}
-                />
-              }
-            />
-            <Route path='*' element={<NoPageFound/>}/>
+            <Route path='/view-page/:id' element={<ViewPage />} />
+            <Route path='*' element={<NoPageFound />} />
           </Routes>
         </BrowserRouter>
       </ErrorBoundary>
