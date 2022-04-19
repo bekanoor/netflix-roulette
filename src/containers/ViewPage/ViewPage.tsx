@@ -2,7 +2,7 @@ import { Footer, FilmCard } from '..'
 import { findMovie, getGenreOutput } from '../../utils'
 import React, { useMemo } from 'react'
 import { Movie, stateTypes } from '../../models/interfaces'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 
 interface IProps {
@@ -12,17 +12,30 @@ interface IProps {
 const ViewPage = ({ movies }: IProps) => {
   const dispatch = useDispatch()
   const handleClick = () => dispatch({ type: 'SET_SEARCH_INPUT', payload: '' })
+  const listOfID = useSelector((state: stateTypes) => state.movieID)
 
-  const movieID = useSelector((state: stateTypes) => state.movieID)
-  const selectedMovie: Array<Movie>  = findMovie(movieID, movies)
+  const navigate = useNavigate()
+  const goBack = () => {
+    if (listOfID.length === 1) {
+      navigate('/')
+      dispatch({ type: 'SET_SEARCH_INPUT', payload: '' })
+      return
+    }
 
+    navigate(-1)
+    dispatch({ type: 'GET_PREV_STATE' })
+  }
+
+  const getListID = useSelector((state: stateTypes) => state.movieID)
+  const movieID = getListID[getListID.length - 1]
+
+  const selectedMovie: Array<Movie> = findMovie(movieID, movies)
   const hasGenre = (item: string) => selectedMovie[0].genres.includes(item)
   const getMovies = (): Movie[] =>
     movies.filter(({ genres }) => genres.every(hasGenre))
 
   const memoizedMovies = useMemo(() => getMovies(), [movies])
-  console.log(selectedMovie[0].poster_path);
-  
+
   return (
     <div className='wrapper'>
       <header className='header-view'>
@@ -31,11 +44,20 @@ const ViewPage = ({ movies }: IProps) => {
             netflix
             <span className='header__logo header__logo-regular'>roulette</span>
           </p>
-          <Link to='/'>
-            <button onClick={handleClick} className='search-button'>
-              SEARCH
+          <div>
+            <Link to='/'>
+              <button onClick={handleClick} className='search-button'>
+                SEARCH
+              </button>
+            </Link>
+            <button
+              onClick={goBack}
+              style={{ marginLeft: '10px' }}
+              className='search-button'
+            >
+              BACK
             </button>
-          </Link>
+          </div>
         </div>
         <div className='header-view__wrapper'>
           <div className='header-view__image-container'>
@@ -57,7 +79,7 @@ const ViewPage = ({ movies }: IProps) => {
             </p>
             <div className='header-view__movie-details'>
               <p className='header-view__movie-details-text'>
-                ?{getGenreOutput(selectedMovie[0].genres)}
+                {getGenreOutput(selectedMovie[0].genres)}
               </p>
               <p className='header-view__movie-details-text'>
                 {selectedMovie[0].runtime} min
@@ -93,6 +115,3 @@ const ViewPage = ({ movies }: IProps) => {
 }
 
 export default React.memo(ViewPage)
-function dispatch(): React.MouseEventHandler<HTMLButtonElement> | undefined {
-  throw new Error('Function not implemented.')
-}

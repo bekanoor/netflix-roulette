@@ -17,7 +17,7 @@ const FilmCard = (props: IProps) => {
   const handelChangePage = (event: React.MouseEvent<HTMLDivElement>) => {
     const movieID = +event.currentTarget.id
 
-    dispatch({ type: 'SET_MOVIE_PAGE', payload: movieID })
+    dispatch({ type: 'SET_MOVIE_ID', payload: movieID })
   }
 
   return (
