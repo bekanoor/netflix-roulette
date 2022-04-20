@@ -12,7 +12,7 @@ const FilmCard = (props: IProps) => {
   const { cover, filmTitle, genre, releaseDate, id } = props
 
   return (
-    <Link to={`/view-page/${id}-${filmTitle}`}>
+    <Link to={`/view-page/${id}?${filmTitle}`}>
       <div
         className='film-card'
         id={id.toString()}

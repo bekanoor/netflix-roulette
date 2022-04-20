@@ -11,6 +11,7 @@ type stateTypes = {
   data: {
     data: Array<Movie>
   }
+  isLoading: boolean
 }
 
 type Movie = {
