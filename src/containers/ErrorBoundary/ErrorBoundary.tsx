@@ -1,5 +1,5 @@
 import React, { Component, ErrorInfo, ReactNode } from 'react'
-
+import { Link } from 'react-router-dom'
 interface Props {
   children: ReactNode
 }
@@ -24,7 +24,15 @@ class ErrorBoundary extends Component<Props, State> {
 
   public render() {
     if (this.state.hasError) {
-      return <h1>Sorry... there was an error</h1>
+      return (
+        <div className='empty-result'>
+          <a href='/' className='main-title' style={{ textAlign: 'center' }}>
+            {' '}
+            FILM NOT FOUND <br />
+            GO BACK TO MAIN PAGE
+          </a>
+        </div>
+      )
     }
 
     return this.props.children

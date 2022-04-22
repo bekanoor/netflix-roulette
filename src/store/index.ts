@@ -1,4 +1,2 @@
-import { store } from './store'
-import { reducer } from './reducer'
-
-export { store, reducer }
+export * from './reducer'
+export { store } from './store'

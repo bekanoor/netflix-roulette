@@ -1,40 +1,49 @@
 import { Footer, FilmCard } from '..'
 import { findMovie, getGenreOutput } from '../../utils'
-import React, { useMemo } from 'react'
+import React, { useEffect, useMemo } from 'react'
 import { Movie, stateTypes } from '../../models/interfaces'
-import { Link, useNavigate } from 'react-router-dom'
+import { Link, useParams } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
+import { setData, setLoading, setSearchInput } from '../../store'
 
-interface IProps {
-  movies: Array<Movie>
-}
-
-const ViewPage = ({ movies }: IProps) => {
+const ViewPage = () => {
+  const {
+    data: { data },
+    isLoading,
+  } = useSelector((state: stateTypes) => state)
+  const movies = data
   const dispatch = useDispatch()
-  const handleClick = () => dispatch({ type: 'SET_SEARCH_INPUT', payload: '' })
-  const listOfID = useSelector((state: stateTypes) => state.movieID)
+  const { id } = useParams()
 
-  const navigate = useNavigate()
-  const goBack = () => {
-    if (listOfID.length === 1) {
-      navigate('/')
-      dispatch({ type: 'SET_SEARCH_INPUT', payload: '' })
-      return
+  const selectedMovie: Array<Movie> = findMovie(Number(id), movies)
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const url = 'http://react-cdp-api.herokuapp.com/movies?searchBy=genres'
+        const data = await fetch(url)
+        const json = await data.json()
+
+        dispatch(setData(json))
+        dispatch(setLoading(false))
+      } catch (error) {
+        console.log(error)
+      } finally {
+        dispatch(setLoading(false))
+      }
     }
 
-    navigate(-1)
-    dispatch({ type: 'GET_PREV_STATE' })
-  }
+    fetchData()
+  }, [])
 
-  const getListID = useSelector((state: stateTypes) => state.movieID)
-  const movieID = getListID[getListID.length - 1]
-
-  const selectedMovie: Array<Movie> = findMovie(movieID, movies)
+  const handleClick = () => dispatch(setSearchInput(''))
   const hasGenre = (item: string) => selectedMovie[0].genres.includes(item)
   const getMovies = (): Movie[] =>
     movies.filter(({ genres }) => genres.every(hasGenre))
 
   const memoizedMovies = useMemo(() => getMovies(), [movies])
+
+  if (isLoading) return <h1 style={{ color: 'white' }}>Loading...</h1>
 
   return (
     <div className='wrapper'>
@@ -50,13 +59,6 @@ const ViewPage = ({ movies }: IProps) => {
                 SEARCH
               </button>
             </Link>
-            <button
-              onClick={goBack}
-              style={{ marginLeft: '10px' }}
-              className='search-button'
-            >
-              BACK
-            </button>
           </div>
         </div>
         <div className='header-view__wrapper'>

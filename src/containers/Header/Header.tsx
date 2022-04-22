@@ -1,4 +1,5 @@
 import React from 'react'
+import { setSearchButton, setSearchInput } from '../../store'
 import { Button } from '../../components'
 import { SearchOption } from '../SearchOption'
 
@@ -12,14 +13,11 @@ class Header extends React.Component<IProps> {
   }
 
   handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    this.props.dispatch({
-      type: 'SET_SEARCH_INPUT',
-      payload: event.target.value.toLocaleLowerCase(),
-    })
+    this.props.dispatch(setSearchInput(event.target.value.toLocaleLowerCase()))
   }
 
   buttonHandler = () => {
-    this.props.dispatch({ type: 'SET_SEARCH_BUTTON', payload: 'active' })
+    this.props.dispatch(setSearchButton('active'))
   }
 
   render() {
