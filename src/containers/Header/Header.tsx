@@ -1,17 +1,14 @@
-import React from 'react'
 import { setSearchButton, setSearchInput } from '../../store'
 import { Button } from '../../components'
 import { SearchOption } from '../SearchOption'
+
+import React from 'react'
 
 interface IProps {
   dispatch: (value: object) => void
 }
 
 class Header extends React.Component<IProps> {
-  constructor(props: IProps) {
-    super(props)
-  }
-
   handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     this.props.dispatch(setSearchInput(event.target.value.toLocaleLowerCase()))
   }

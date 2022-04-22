@@ -1,10 +1,12 @@
 import { Footer, FilmCard } from '..'
 import { findMovie, getGenreOutput } from '../../utils'
-import React, { useEffect, useMemo } from 'react'
+
 import { Movie, stateTypes } from '../../models/interfaces'
+import { setData, setLoading, setSearchInput } from '../../store'
+
+import React, { useEffect, useMemo } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
-import { setData, setLoading, setSearchInput } from '../../store'
 
 const ViewPage = () => {
   const {
@@ -34,7 +36,7 @@ const ViewPage = () => {
     }
 
     fetchData()
-  }, [])
+  })
 
   const handleClick = () => dispatch(setSearchInput(''))
   const hasGenre = (item: string) => selectedMovie[0].genres.includes(item)
@@ -66,7 +68,7 @@ const ViewPage = () => {
             <img
               className='header-view__image'
               src={selectedMovie[0].poster_path}
-              alt='image-movie'
+              alt='movie-poster-has-been-here'
             />
           </div>
           <div className='header-view__info'>

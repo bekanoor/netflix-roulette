@@ -1,8 +1,9 @@
-import { render } from 'react-dom'
-import './style.scss'
 import App from './App'
-import { Provider } from 'react-redux'
 import { store } from './store'
+
+import { render } from 'react-dom'
+import { Provider } from 'react-redux'
+import './style.scss'
 
 const rootElement = document.getElementById('root')
 

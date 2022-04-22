@@ -1,9 +1,12 @@
-import React, { useEffect, useMemo } from 'react'
 import { Header, Main, Footer, NoMatches, SortResult } from '../'
 import { matchedMovies } from '../../utils'
 import { Movie, stateTypes } from '../../models/'
-import { useDispatch, useSelector } from 'react-redux'
 import { setData, setLoading, setSearchButton } from '../../store'
+
+import { useDispatch, useSelector } from 'react-redux'
+import React, { useEffect, useMemo } from 'react'
+
+
 
 const MainPage = () => {
   const dispatch = useDispatch()
