@@ -10,7 +10,6 @@ import React, { useEffect, useMemo } from 'react'
 
 const MainPage = () => {
   const dispatch = useDispatch()
-
   const {
     data: { data },
     isLoading,

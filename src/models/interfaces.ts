@@ -2,6 +2,10 @@ type actionType = {
   type: string
   payload: any
 }
+type viewPageType = {
+  selectedMovie: Array<Movie>
+  sameGenreMovies: Array<Movie>
+}
 
 type stateTypes = {
   searchType: string
@@ -12,6 +16,9 @@ type stateTypes = {
     data: Array<Movie>
   }
   isLoading: boolean
+  selectedMovie: Array<any>
+  sameGenreMovies: Array<any>
+  // viewPageContent: viewPageType
 }
 
 type Movie = {

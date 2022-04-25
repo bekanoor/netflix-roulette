@@ -8,6 +8,7 @@ interface IProps {
 
 const Main = (props: IProps) => {
   const { movies } = props
+  
   return (
     <main className='movies-wrapper' data-testid='main-test'>
       {movies.map((item) => {

@@ -1,4 +1,4 @@
-import { actionType, stateTypes } from 'src/models'
+import { actionType, Movie, stateTypes } from 'src/models'
 
 const defaultState: stateTypes = {
   searchType: 'title',
@@ -9,6 +9,8 @@ const defaultState: stateTypes = {
     data: [],
   },
   isLoading: true,
+  selectedMovie: [],
+  sameGenreMovies: [], 
 }
 
 export const reducer = (
@@ -28,6 +30,10 @@ export const reducer = (
       return { ...state, data: action.payload }
     case 'SET_LOADING':
       return { ...state, isLoading: action.payload }
+    case 'SET_SELECTED_MOVIE_ID':
+      return {...state, selectedMovie: action.payload}
+    case 'SET_SAME_GENRE_MOVIES':
+      return {...state, sameGenreMovies: action.payload}
     default:
       return state
   }
@@ -55,4 +61,12 @@ export const setData = (data: any) => {
 
 export const setLoading = (status: boolean) => {
   return { type: 'SET_LOADING', payload: status }
+}
+
+export const setSelectedMovie = (value: Array<Movie>) => {
+  return { type: 'SET_SELECTED_MOVIE_ID', payload: value}
+}
+
+export const setSameGenreMovies = (value: Array<Movie>) => {
+  return { type: 'SET_SAME_GENRE_MOVIES', payload: value}
 }

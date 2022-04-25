@@ -1,3 +1,3 @@
-import { SearchOption } from "./SearchOption";
+import { SearchOption } from './SearchOption';
 
 export { SearchOption };

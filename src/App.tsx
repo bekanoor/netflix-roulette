@@ -1,25 +1,42 @@
-import { ErrorBoundary } from './containers/'
+import { ErrorBoundary, MainPage, ViewPage } from './containers/'
 import { NoPageFound } from './containers/NoPageFound'
 
 import React from 'react'
 import { Routes, Route, BrowserRouter } from 'react-router-dom'
 
-const MainPage = React.lazy(() => import('./containers/MainPage/MainPage'))
-const ViewPage = React.lazy(() => import('./containers/ViewPage/ViewPage'))
+// const MainPage = React.lazy(() => import('./containers/MainPage/MainPage'))
+// const ViewPage = React.lazy(() => import('./containers/ViewPage/ViewPage'))
 
 export default function App() {
   return (
-    <BrowserRouter>
-      <React.Suspense fallback={() => <h1 style={{color: 'white'}}>Loading...</h1>}>
-        <ErrorBoundary>
-          <Routes>
-            <Route path='/' element={<MainPage />} />
-            <Route path='/view-page/:id' element={<ViewPage />} />
+    <ErrorBoundary>
+      <BrowserRouter>
+        <Routes>
+          <Route>
+            <Route
+              index
+              element={
+                <React.Suspense
+                  fallback={() => <h1 style={{ color: 'white' }}>Loading...</h1>}
+                >
+                  <MainPage />
+                </React.Suspense>
+              }
+            />
+            <Route
+              path='/view-page/:id'
+              element={
+                <React.Suspense
+                  fallback={() => <h1 style={{ color: 'white' }}>Loading...</h1>}
+                >
+                  <ViewPage />
+                </React.Suspense>
+              }
+            />
             <Route path='*' element={<NoPageFound />} />
-          </Routes>
-        </ErrorBoundary>
-      </React.Suspense>
-    </BrowserRouter>
-
+          </Route>
+        </Routes>
+      </BrowserRouter>
+    </ErrorBoundary>
   )
 }
