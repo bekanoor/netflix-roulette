@@ -12,29 +12,27 @@ export default function App() {
     <ErrorBoundary>
       <BrowserRouter>
         <Routes>
-          <Route>
-            <Route
-              index
-              element={
-                <React.Suspense
-                  fallback={() => <h1 style={{ color: 'white' }}>Loading...</h1>}
-                >
-                  <MainPage />
-                </React.Suspense>
-              }
-            />
-            <Route
-              path='/view-page/:id'
-              element={
-                <React.Suspense
-                  fallback={() => <h1 style={{ color: 'white' }}>Loading...</h1>}
-                >
-                  <ViewPage />
-                </React.Suspense>
-              }
-            />
-            <Route path='*' element={<NoPageFound />} />
-          </Route>
+          <Route
+            path='/'
+            element={
+              <React.Suspense
+                fallback={() => <h1 style={{ color: 'white' }}>Loading...</h1>}
+              >
+                <MainPage />
+              </React.Suspense>
+            }
+          />
+          <Route
+            path='/view-page/:id'
+            element={
+              <React.Suspense
+                fallback={() => <h1 style={{ color: 'white' }}>Loading...</h1>}
+              >
+                <ViewPage />
+              </React.Suspense>
+            }
+          />
+          <Route path='*' element={<NoPageFound />} />
         </Routes>
       </BrowserRouter>
     </ErrorBoundary>

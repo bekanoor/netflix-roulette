@@ -1,8 +1,4 @@
-import { setSelectedMovie, setSameGenreMovies } from '../../store'
-
-import { useDispatch } from 'react-redux'
-import { Link, useNavigate } from 'react-router-dom'
-
+import { Link } from 'react-router-dom'
 
 interface IProps {
   cover: string
@@ -14,19 +10,16 @@ interface IProps {
 
 const FilmCard = (props: IProps) => {
   const { cover, filmTitle, genre, releaseDate, id } = props
-  const handleChange = () => {
-  }
-  
+
   return (
     <Link to={`/view-page/${id}`}>
       <div
         className='film-card'
         id={id.toString()}
         data-testid='film-card-test'
-        onClick={handleChange}
       >
         <div className='film-card__image-container'>
-          {/* <img className='film-card__image' src={cover} alt='image'></img> */}
+          <img className='film-card__image' src={cover} alt={filmTitle}></img>
         </div>
         <div className='film-card__title-container'>
           <p className='film-card__title'>{filmTitle}</p>

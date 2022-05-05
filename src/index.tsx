@@ -3,7 +3,7 @@ import { store } from './store'
 
 import { render } from 'react-dom'
 import { Provider } from 'react-redux'
-import './style.scss'
+import './styles/style.scss'
 
 const rootElement = document.getElementById('root')
 
