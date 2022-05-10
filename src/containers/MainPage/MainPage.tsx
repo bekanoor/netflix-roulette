@@ -1,6 +1,6 @@
 import { Header, Main, Footer, NoMatches, SortResult } from '../'
 import { fetchMovies, fetchMoviesBySearchType } from '../../utils'
-import { setData, setSearchButton } from '../../store'
+import { setData, setFilterType, setSearchButton } from '../../store'
 import { useAppDispatch, useAppSelector } from '../../hook'
 
 import React, { useEffect } from 'react'
@@ -8,9 +8,10 @@ import { useSearchParams } from 'react-router-dom'
 
 const MainPage = () => {
   const dispatch = useAppDispatch()
-  const movies = useAppSelector((state) => state.data)
+  const movies = useAppSelector((state) => state.movies.data)
 
-  const { searchQuery, isButton } = useAppSelector((state) => state)
+  const isButton: boolean  = useAppSelector((state) => state.searchParam.isButton)
+  const searchQuery: string = useAppSelector((state) => state.searchParam.searchQuery)
   const [searchParams, setSearchParams] = useSearchParams()
 
   const query = searchParams.get('query')
@@ -50,6 +51,7 @@ const MainPage = () => {
 
   if (isButton) {
     dispatch(setSearchButton(false))
+    dispatch(setFilterType('vote_average'))
     setSearchParams({})
   }
 

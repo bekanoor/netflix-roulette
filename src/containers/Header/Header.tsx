@@ -2,19 +2,15 @@ import { setSearchButton, setSearchQuery, setSearchType } from '../../store'
 import { Button } from '../../components'
 import { useAppDispatch, useAppSelector } from '../../hook'
 
-import React from 'react'
 import { useSearchParams } from 'react-router-dom'
 
 const Header = () => {
   const dispatch = useAppDispatch()
-  const { searchQuery, searchBy, filterBy } = useAppSelector((state) => state)
+  const searchQuery:string = useAppSelector((state) => state.searchParam.searchQuery)
+  const searchBy:string = useAppSelector((state) => state.searchParam.searchBy)
+  const filterBy:string  = useAppSelector((state) => state.searchParam.filterBy)
 
   const [, setSearchParams] = useSearchParams()
-
-  const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const value = event.target.value.toLowerCase()
-    dispatch(setSearchQuery(value))
-  }
 
   const handleForm = (event: any) => {
     event.preventDefault()

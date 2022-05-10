@@ -9,14 +9,19 @@ import React, { useEffect } from 'react'
 import { Link, useParams } from 'react-router-dom'
 
 const ViewPage = () => {
-  const { selectedMovie, sameGenreMovies, data } = useAppSelector(
-    (state) => state
+  const sameGenreMovies: Array<Movie> = useAppSelector(
+    (state) => state.movies.sameGenreMovies
   )
+  const selectedMovie: Array<Movie> = useAppSelector(
+    (state) => state.movies.selectedMovie
+  )
+  const data: Array<Movie> = useAppSelector((state) => state.movies.data)
+
   const dispatch = useAppDispatch()
 
   const { id = '337167' } = useParams()
   const [chosenMovie] = selectedMovie
-  const cachedID = [data.find((item) => item.id === +id)] as Array<Movie>
+  const cachedID = [data.find((item: Movie) => item.id === +id)] as Array<Movie>
   const [movie] = cachedID
 
   useEffect(() => {
@@ -41,7 +46,7 @@ const ViewPage = () => {
           )
         })
     }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [id])
 
   if (!selectedMovie.length && !sameGenreMovies.length)
