@@ -1,75 +1,63 @@
-import React, { useEffect, useMemo } from 'react'
 import { Header, Main, Footer, NoMatches, SortResult } from '../'
-import { matchedMovies } from '../../utils'
-import { Movie, stateTypes } from '../../models/'
-import { useDispatch, useSelector } from 'react-redux'
-import { setData, setLoading, setSearchButton } from '../../store'
+import { fetchMovies, fetchMoviesBySearchType } from '../../utils'
+import { setData, setSearchButton } from '../../store'
+import { useAppDispatch, useAppSelector } from '../../hook'
+
+import React, { useEffect } from 'react'
+import { useSearchParams } from 'react-router-dom'
 
 const MainPage = () => {
-  const dispatch = useDispatch()
+  const dispatch = useAppDispatch()
+  const movies = useAppSelector((state) => state.data)
 
-  const {
-    data: { data },
-    isLoading,
-  } = useSelector((state: stateTypes) => state)
+  const { searchQuery, isButton } = useAppSelector((state) => state)
+  const [searchParams, setSearchParams] = useSearchParams()
 
-  const movies = data
+  const query = searchParams.get('query')
+  const searchType = searchParams.get('searchBy') || 'title'
+  const filterBy = searchParams.get('filterBy') || 'vote_average'
 
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const url = 'http://react-cdp-api.herokuapp.com/movies?searchBy=genres'
-        const data = await fetch(url)
-        const json = await data.json()
-
-        dispatch(setData(json))
-        dispatch(setLoading(false))
-      } catch (error) {
-        console.log(error)
-      } finally {
-        dispatch(setLoading(false))
-      }
-    }
-
-    fetchData()
+    fetchMovies().then((response) => dispatch(setData(response)))
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
-  const searchType = useSelector((state: stateTypes) => state.searchType)
-  const filterType = useSelector((state: stateTypes) => state.filterType)
-  const searchInput = useSelector((state: stateTypes) => state.searchInput)
-  const searchButton = useSelector((state: stateTypes) => state.searchButton)
+  useEffect(() => {
+    if (query === null) {
+      fetchMovies().then((response) => dispatch(setData(response)))
+    } else {
+      fetchMoviesBySearchType(query, searchType, filterBy).then((response) =>
+        dispatch(setData(response))
+      )
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [filterBy, searchParams])
 
-  const computedData = useMemo(
-    () => matchedMovies(searchType, searchInput, movies, filterType),
-    [searchType, searchInput, filterType]
-  )
-
-  const footer = useMemo(() => <Footer></Footer>, [])
-
-  if (searchButton === 'active' && searchInput.length) {
+  if (isButton && searchQuery.length) {
     return (
       <div className='wrapper'>
-        <Header dispatch={dispatch} />
-        <SortResult movieLength={computedData?.length}></SortResult>
-        {computedData!.length > 0 ? (
-          <Main movies={computedData as Array<Movie>}></Main>
+        <Header />
+        <SortResult movieLength={movies?.length}></SortResult>
+        {movies!.length > 0 ? (
+          <Main movies={movies}></Main>
         ) : (
           <NoMatches></NoMatches>
         )}
-        {footer}
+        {<Footer />}
       </div>
     )
   }
 
-  if (searchButton === 'active') {
-    dispatch(setSearchButton('disable'))
+  if (isButton) {
+    dispatch(setSearchButton(false))
+    setSearchParams({})
   }
 
-  if (isLoading) return <h1 style={{ color: 'white' }}>Loading...</h1>
+  if (!movies.length) return <h1 style={{ color: 'white' }}>Loading...</h1>
 
   return (
     <div className='wrapper'>
-      <Header dispatch={dispatch} />
+      <Header />
       <Main movies={movies}></Main>
       <Footer></Footer>
     </div>

@@ -1,0 +1,24 @@
+{
+  "extends": [
+    "react-app",
+    "react-app/jest"
+  ],
+  "overrides": [
+    {
+      "files": [
+        "**/*.stories.*"
+      ],
+      "rules": {
+        "import/no-anonymous-default-export": "off"
+      }
+    }
+  ],
+  "rules": {
+    "no-console": "warn",
+    "quotes": ["error", "single"],
+    "import/order": ["error", {
+      "groups": ["index", "sibling", "parent", "internal", "external", "builtin", "object", "type"],
+      "newlines-between": "always-and-inside-groups"
+    }]
+  }
+}

@@ -65,11 +65,10 @@ body {
   opacity: 0.5;
 }
 
-@import './containers/Header/header';
-@import './containers/Main/main';
-@import './containers/SearchOption/search-option';
-@import './containers/FilmCard/_film-card';
-@import './containers/Footer/footer';
-@import './containers/ViewPage/view-page';
-@import './containers/NoMatches/no-matches';
-@import './containers/SortResult/sort-result'
+@import '../containers/Header/header';
+@import '../containers/Main/main';
+@import '../containers/FilmCard/_film-card';
+@import '../containers/Footer/footer';
+@import '../containers/ViewPage/view-page';
+@import '../containers/NoMatches/no-matches';
+@import '../containers/SortResult/sort-result'

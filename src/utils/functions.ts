@@ -1,12 +1,12 @@
 import { Movie } from 'src/models'
+const BASE = 'http://react-cdp-api.herokuapp.com/'
 
-
-const getGenreOutput = (item: string[] | undefined) => {
+export const getGenreOutput = (item: string[] | undefined) => {
   if (item === undefined) return
   return item.length > 2 ? item.join(', ') : item.join(' & ')
 }
 
-const matchedMovies = (
+export const matchedMovies = (
   searchType: string,
   searchInput: string,
   data: Array<Movie>,
@@ -55,10 +55,66 @@ const matchedMovies = (
   )
 }
 
-const findMovie = (movieID: number, movies: Array<Movie>) => {
-  const result: any = movies.find(({ id }) => id === movieID)
+export const findMovie = (movieID: number, movies: Array<Movie>) => {
+  const result = movies.find(({ id }) => id === movieID)
 
   return result ? [result] : []
 }
 
-export { getGenreOutput, matchedMovies, findMovie }
+export const fetchDataById = async (id: string) => {
+  try {
+    const url = `${BASE}movies/${id}`
+    const data = await fetch(url)
+    const json = await data.json()
+
+    return json
+  } catch (error) {
+    // eslint-disable-next-line no-console
+    console.error(error)
+  }
+}
+
+export const fetchDataByGenre = async (genre: string) => {
+  try {
+    const url = `
+      ${BASE}movies?search=${genre}&searchBy=genres&limit=20
+    `
+    const data = await fetch(url)
+    const json = await data.json()
+
+    return json.data
+  } catch (error) {
+    // eslint-disable-next-line no-console
+    console.error(error)
+  }
+}
+
+export const fetchMovies = async () => {
+  try {
+    const url = `${BASE}movies`
+    const data = await fetch(url)
+    const json = await data.json()
+
+    return json.data
+  } catch (error) {
+    // eslint-disable-next-line no-console
+    console.error(error)
+  }
+}
+
+export const fetchMoviesBySearchType = async (
+  query: string,
+  searchBy: string,
+  sortBy: string = 'vote_average'
+) => {
+  try {
+    const url = `${BASE}movies?sortBy=${sortBy}&sortOrder=desc&search=${query}&searchBy=${searchBy}&limit=15`
+    const data = await fetch(url)
+    const json = await data.json()
+
+    return json.data
+  } catch (error) {
+    // eslint-disable-next-line no-console
+    console.error(error)
+  }
+}

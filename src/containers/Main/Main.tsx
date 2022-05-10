@@ -6,14 +6,10 @@ interface IProps {
   movies: Array<Movie>
 }
 
-const Main = (props: IProps) => {
-  const { movies } = props
+const Main: React.FC<IProps> = ({ movies }) => {
   return (
     <main className='movies-wrapper' data-testid='main-test'>
-      {movies.map((item) => {
-        const { poster_path, title, release_date, id, genres } = item
-        const genreResult = getGenreOutput(genres)
-
+      {movies.map(({ poster_path, title, release_date, id, genres }) => {
         return (
           <FilmCard
             id={id}
@@ -21,7 +17,7 @@ const Main = (props: IProps) => {
             cover={poster_path}
             filmTitle={title}
             releaseDate={release_date.substring(0, 4)}
-            genre={genreResult}
+            genre={getGenreOutput(genres)}
           ></FilmCard>
         )
       })}

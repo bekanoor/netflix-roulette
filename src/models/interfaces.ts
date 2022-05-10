@@ -4,14 +4,14 @@ type actionType = {
 }
 
 type stateTypes = {
-  searchType: string
-  filterType: string
-  searchInput: string
-  searchButton: string
-  data: {
-    data: Array<Movie>
-  }
+  searchBy: string
+  filterBy: string
+  searchQuery: string
+  isButton: boolean
+  data: Array<Movie>
   isLoading: boolean
+  selectedMovie: Array<any>
+  sameGenreMovies: Array<any>
 }
 
 type Movie = {

@@ -5,7 +5,7 @@ $primary-red: #F65261;
   background: url('../../assets/images/header-bg.png');
   padding: 0 56px;
 
-  &__logo{
+  &__logo {
     margin: 0;
     padding: 20px 0;
     color: $primary-red;
@@ -36,4 +36,28 @@ $primary-red: #F65261;
 }
 .header__filter-btn {
   margin-top: 15px;
+}
+$primary-red: #F65261;
+
+.option-list {
+  display: flex;
+  width: 300px;
+  justify-content: space-between;
+  align-items: center;
+
+  &__item {
+    color: white;
+    text-transform: uppercase;
+  }
+  &__button {
+    text-transform: uppercase;
+    background-color: #555555;
+    width: 80px;
+    height: 30px;
+    color: white;
+    border-radius: 5px;
+  }
+  &__button--active {
+    background-color: $primary-red;
+  }
 }

@@ -1,2 +1,2 @@
 export * from './reducer'
-export { store } from './store'
+export *  from './store'

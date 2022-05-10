@@ -1,49 +1,51 @@
-import { Footer, FilmCard } from '..'
-import { findMovie, getGenreOutput } from '../../utils'
-import React, { useEffect, useMemo } from 'react'
-import { Movie, stateTypes } from '../../models/interfaces'
+import { FilmCard, Footer } from '..'
+import { fetchDataById, getGenreOutput, fetchDataByGenre } from '../../utils'
+import { useAppDispatch, useAppSelector } from '../../hook'
+
+import { Movie } from '../../models/interfaces'
+import { setSelectedMovie, setSameGenreMovies } from '../../store'
+
+import React, { useEffect } from 'react'
 import { Link, useParams } from 'react-router-dom'
-import { useDispatch, useSelector } from 'react-redux'
-import { setData, setLoading, setSearchInput } from '../../store'
 
 const ViewPage = () => {
-  const {
-    data: { data },
-    isLoading,
-  } = useSelector((state: stateTypes) => state)
-  const movies = data
-  const dispatch = useDispatch()
-  const { id } = useParams()
+  const { selectedMovie, sameGenreMovies, data } = useAppSelector(
+    (state) => state
+  )
+  const dispatch = useAppDispatch()
 
-  const selectedMovie: Array<Movie> = findMovie(Number(id), movies)
+  const { id = '337167' } = useParams()
+  const [chosenMovie] = selectedMovie
+  const cachedID = [data.find((item) => item.id === +id)] as Array<Movie>
+  const [movie] = cachedID
 
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const url = 'http://react-cdp-api.herokuapp.com/movies?searchBy=genres'
-        const data = await fetch(url)
-        const json = await data.json()
+    if (movie) {
+      const [first] = cachedID
+      const [genre] = first.genres
 
-        dispatch(setData(json))
-        dispatch(setLoading(false))
-      } catch (error) {
-        console.log(error)
-      } finally {
-        dispatch(setLoading(false))
-      }
+      dispatch(setSelectedMovie(cachedID))
+      fetchDataByGenre(genre).then((res) => dispatch(setSameGenreMovies(res)))
+    } else {
+      fetchDataById(id)
+        .then((result: Movie) => {
+          dispatch(setSelectedMovie([result]))
+          return result
+        })
+        .then((result: Movie) => {
+          const { genres } = result
+          const [genre] = genres
+
+          fetchDataByGenre(genre).then((res) =>
+            dispatch(setSameGenreMovies(res))
+          )
+        })
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [id])
 
-    fetchData()
-  }, [])
-
-  const handleClick = () => dispatch(setSearchInput(''))
-  const hasGenre = (item: string) => selectedMovie[0].genres.includes(item)
-  const getMovies = (): Movie[] =>
-    movies.filter(({ genres }) => genres.every(hasGenre))
-
-  const memoizedMovies = useMemo(() => getMovies(), [movies])
-
-  if (isLoading) return <h1 style={{ color: 'white' }}>Loading...</h1>
+  if (!selectedMovie.length && !sameGenreMovies.length)
+    return <h1 style={{ color: 'white' }}>Loading...</h1>
 
   return (
     <div className='wrapper'>
@@ -55,9 +57,7 @@ const ViewPage = () => {
           </p>
           <div>
             <Link to='/'>
-              <button onClick={handleClick} className='search-button'>
-                SEARCH
-              </button>
+              <button className='search-button'>SEARCH</button>
             </Link>
           </div>
         </div>
@@ -65,51 +65,52 @@ const ViewPage = () => {
           <div className='header-view__image-container'>
             <img
               className='header-view__image'
-              src={selectedMovie[0].poster_path}
-              alt='image-movie'
+              src={chosenMovie.poster_path}
+              alt='movie-poster-has-been-here'
             />
           </div>
           <div className='header-view__info'>
             <h1 className='main-title'>
-              {selectedMovie[0].title}{' '}
+              {chosenMovie.title}{' '}
               <button className='header-view__score'>
-                {selectedMovie[0].vote_average}
+                {chosenMovie.vote_average}
               </button>
             </h1>
             <p className='header-view__genres primary-text'>
-              {selectedMovie[0].genres.join(', ')}
+              {chosenMovie.genres.join(', ')}
             </p>
             <div className='header-view__movie-details'>
               <p className='header-view__movie-details-text'>
-                {getGenreOutput(selectedMovie[0].genres)}
+                {getGenreOutput(chosenMovie.genres)}
               </p>
               <p className='header-view__movie-details-text'>
-                {selectedMovie[0].runtime} min
+                {chosenMovie.runtime} min
               </p>
             </div>
             <p className='primary-text header-view__description'>
-              {selectedMovie[0].overview}
+              {chosenMovie.overview}
             </p>
           </div>
         </div>
         <div className='header-view__movie-with-same-genre'>
-          Films by {selectedMovie[0].genres.join(', ')} genre
+          Films by {chosenMovie.genres.join(', ')} genre
         </div>
       </header>
       <main className='movies-wrapper'>
-        {memoizedMovies.map((item) => {
-          const { poster_path, genres, title, release_date } = item
-          return (
-            <FilmCard
-              key={item.id}
-              cover={poster_path}
-              genre={getGenreOutput(genres)}
-              filmTitle={title}
-              releaseDate={release_date.substring(0, 4)}
-              id={item.id}
-            />
-          )
-        })}
+        {sameGenreMovies.map(
+          ({ poster_path, genres, title, release_date, id }) => {
+            return (
+              <FilmCard
+                key={id}
+                cover={poster_path}
+                genre={getGenreOutput(genres)}
+                filmTitle={title}
+                releaseDate={release_date.substring(0, 4)}
+                id={id}
+              />
+            )
+          }
+        )}
       </main>
       <Footer />
     </div>
