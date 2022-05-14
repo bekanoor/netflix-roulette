@@ -1,4 +1,4 @@
 export * from './actions'
 export *  from './store'
-export * from './moviesReducer'
-export * from './searchParamReducer'
+export * from './reducers/moviesReducer'
+export * from './reducers/searchParamReducer'

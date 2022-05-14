@@ -1,4 +1,4 @@
-import { setSearchButton, setSearchQuery, setSearchType } from '../../store'
+import { setFilterType, setSearchStatus, setSearchQuery, setSearchType } from '../../store'
 import { Button } from '../../components'
 import { useAppDispatch, useAppSelector } from '../../hook'
 
@@ -10,18 +10,28 @@ const Header = () => {
   const searchBy:string = useAppSelector((state) => state.searchParam.searchBy)
   const filterBy:string  = useAppSelector((state) => state.searchParam.filterBy)
 
-  const [, setSearchParams] = useSearchParams()
+  const [searchParams, setSearchParams] = useSearchParams()
 
-  const handleForm = (event: any) => {
+  const handlerForm = (event: any) => {
     event.preventDefault()
 
-    dispatch(setSearchButton(true))
+    dispatch(setSearchStatus(true))
 
     setSearchParams({
       query: searchQuery,
       searchBy: searchBy,
       filterBy: filterBy,
     })
+  }
+
+  const handlerInput = (event: any) => {
+    dispatch(setSearchQuery(event.target.value))
+    
+    if(searchQuery.length === 1) {
+      dispatch(setSearchStatus(false))
+      dispatch(setFilterType('vote_average'))
+      setSearchParams({})
+    }
   }
 
   return (
@@ -31,12 +41,12 @@ const Header = () => {
         <span className='header__logo header__logo-regular'>roulette</span>
       </p>
       <h1 className='main-title'>FIND YOUR MOVIE</h1>
-      <form onSubmit={handleForm}>
+      <form onSubmit={handlerForm}>
         <input
           className='input-search header__input'
           placeholder='What do you want to watch?'
           name='query'
-          onChange={(event) => dispatch(setSearchQuery(event.target.value))}
+          onChange={handlerInput}
         ></input>
         <Button
           className='header__search-btn'

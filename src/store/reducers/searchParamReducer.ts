@@ -1,20 +1,20 @@
-import { actionType } from '../models'
+import { actionType } from '../../models'
 
-type defaultStateType = {
+type InitialState = {
   searchBy: string
   filterBy: string
   searchQuery: string
-  isButton: boolean
+  searchStatus: boolean
 }
 
-const defaultState: defaultStateType = {
+const initialState: InitialState = {
   searchBy: 'title',
   filterBy: 'vote_average',
   searchQuery: '',
-  isButton: false,
+  searchStatus: false,
 }
 
-const searchParamReducer = (state = defaultState, action: actionType) => {
+const searchParamReducer = (state = initialState, action: actionType) => {
   switch (action.type) {
     case 'SET_SEARCH_BY':
       return { ...state, searchBy: action.payload }
@@ -23,7 +23,7 @@ const searchParamReducer = (state = defaultState, action: actionType) => {
     case 'SET_SEARCH_QUERY':
       return { ...state, searchQuery: action.payload }
     case 'SET_BUTTON_STATE':
-      return { ...state, isButton: action.payload }
+      return { ...state, searchStatus: action.payload }
     default:
       return state
   }

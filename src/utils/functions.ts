@@ -95,7 +95,7 @@ export const fetchMovies = async () => {
     const data = await fetch(url)
     const json = await data.json()
 
-    return json.data
+    return  json.data
   } catch (error) {
     // eslint-disable-next-line no-console
     console.error(error)

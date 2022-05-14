@@ -1,7 +1,12 @@
-import { Header, Main, Footer, NoMatches, SortResult } from '../'
-import { fetchMovies, fetchMoviesBySearchType } from '../../utils'
-import { setData, setFilterType, setSearchButton } from '../../store'
+import { Header, Main, Footer, NoPageFound, SortResult, NoMatches } from '../'
+import {
+  startSetMovies,
+  setFilterType,
+  setSearchStatus,
+  startSetMoviesWithParams,
+} from '../../store/actions'
 import { useAppDispatch, useAppSelector } from '../../hook'
+import { MAIN_PAGE_ERROR } from '../../store/constants'
 
 import React, { useEffect } from 'react'
 import { useSearchParams } from 'react-router-dom'
@@ -9,9 +14,16 @@ import { useSearchParams } from 'react-router-dom'
 const MainPage = () => {
   const dispatch = useAppDispatch()
   const movies = useAppSelector((state) => state.movies.data)
-
-  const isButton: boolean  = useAppSelector((state) => state.searchParam.isButton)
-  const searchQuery: string = useAppSelector((state) => state.searchParam.searchQuery)
+  const mainPageError: string = useAppSelector(
+    (state) => state.errors.mainPageError
+  )
+  
+  const searchStatus: boolean = useAppSelector(
+    (state) => state.searchParam.searchStatus
+  )
+  const searchQuery: string = useAppSelector(
+    (state) => state.searchParam.searchQuery
+  )
   const [searchParams, setSearchParams] = useSearchParams()
 
   const query = searchParams.get('query')
@@ -19,49 +31,42 @@ const MainPage = () => {
   const filterBy = searchParams.get('filterBy') || 'vote_average'
 
   useEffect(() => {
-    fetchMovies().then((response) => dispatch(setData(response)))
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
-
-  useEffect(() => {
     if (query === null) {
-      fetchMovies().then((response) => dispatch(setData(response)))
+      dispatch(startSetMovies())
     } else {
-      fetchMoviesBySearchType(query, searchType, filterBy).then((response) =>
-        dispatch(setData(response))
-      )
+      dispatch(startSetMoviesWithParams([query, searchType, filterBy]))
     }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [filterBy, searchParams])
-
-  if (isButton && searchQuery.length) {
+  }, [filterBy, searchParams, dispatch, query, searchType])
+  
+  if (searchStatus && searchQuery.length) {
     return (
       <div className='wrapper'>
         <Header />
-        <SortResult movieLength={movies?.length}></SortResult>
-        {movies!.length > 0 ? (
-          <Main movies={movies}></Main>
-        ) : (
-          <NoMatches></NoMatches>
-        )}
+        <SortResult movieLength={movies?.length} />
+        {movies!.length > 0 ? <Main movies={movies} /> : <NoMatches />}
         {<Footer />}
       </div>
     )
   }
+  
+  // if (isButton) {
+  //   dispatch(setSearchButton(false))
+  //   dispatch(setFilterType('vote_average'))
+  //   setSearchParams({})
+  // }
 
-  if (isButton) {
-    dispatch(setSearchButton(false))
-    dispatch(setFilterType('vote_average'))
-    setSearchParams({})
-  }
-
-  if (!movies.length) return <h1 style={{ color: 'white' }}>Loading...</h1>
-
+  // if (mainPageError) {
+  //   return <NoPageFound text='404 not movie found' />
+  // }
+  
+  if (!movies.length)
+    return <h1 style={{ color: 'white' }}>Loading...</h1>
+  
   return (
     <div className='wrapper'>
       <Header />
-      <Main movies={movies}></Main>
-      <Footer></Footer>
+      <Main movies={movies} />
+      <Footer />
     </div>
   )
 }

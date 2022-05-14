@@ -1,9 +1,10 @@
 import { FilmCard, Footer } from '..'
+import { NoPageFound } from '../NoPageFound'
 import { fetchDataById, getGenreOutput, fetchDataByGenre } from '../../utils'
 import { useAppDispatch, useAppSelector } from '../../hook'
 
 import { Movie } from '../../models/interfaces'
-import { setSelectedMovie, setSameGenreMovies } from '../../store'
+import { setNewTabMovie, setSelectedMovie, startSetSameGenreMovies } from '../../store'
 
 import React, { useEffect } from 'react'
 import { Link, useParams } from 'react-router-dom'
@@ -16,11 +17,12 @@ const ViewPage = () => {
     (state) => state.movies.selectedMovie
   )
   const data: Array<Movie> = useAppSelector((state) => state.movies.data)
-
   const dispatch = useAppDispatch()
+    
+  const { id = 'no-page-found'} = useParams()
 
-  const { id = '337167' } = useParams()
   const [chosenMovie] = selectedMovie
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   const cachedID = [data.find((item: Movie) => item.id === +id)] as Array<Movie>
   const [movie] = cachedID
 
@@ -30,23 +32,10 @@ const ViewPage = () => {
       const [genre] = first.genres
 
       dispatch(setSelectedMovie(cachedID))
-      fetchDataByGenre(genre).then((res) => dispatch(setSameGenreMovies(res)))
+      dispatch(startSetSameGenreMovies(genre))
     } else {
-      fetchDataById(id)
-        .then((result: Movie) => {
-          dispatch(setSelectedMovie([result]))
-          return result
-        })
-        .then((result: Movie) => {
-          const { genres } = result
-          const [genre] = genres
-
-          fetchDataByGenre(genre).then((res) =>
-            dispatch(setSameGenreMovies(res))
-          )
-        })
+      dispatch(setNewTabMovie(id))
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [id])
 
   if (!selectedMovie.length && !sameGenreMovies.length)

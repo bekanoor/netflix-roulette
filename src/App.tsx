@@ -32,7 +32,7 @@ export default function App() {
               </React.Suspense>
             }
           />
-          <Route path='*' element={<NoPageFound />} />
+          <Route path='*' element={<NoPageFound text='404 page not found'/>} />
         </Routes>
       </BrowserRouter>
     </ErrorBoundary>

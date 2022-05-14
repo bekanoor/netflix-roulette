@@ -1,4 +1,4 @@
-import { actionType, Movie, stateTypes } from '../models'
+import { actionType, Movie, stateTypes } from '../../models'
 
 type defaultStateType = {
   data: Array<Movie> | [],
@@ -16,7 +16,7 @@ const defaultState: defaultStateType = {
 
 const moviesReducer = (state = defaultState, action: actionType) => {
   switch (action.type) {
-    case 'SET_DATA':
+    case 'FINISH_SET_MOVIES':
       return { ...state, data: action.payload }
     case 'SET_LOADING':
       return { ...state, isLoading: action.payload }
