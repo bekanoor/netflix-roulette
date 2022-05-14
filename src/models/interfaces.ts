@@ -1,8 +1,3 @@
-type actionType = {
-  type: string
-  payload: any
-}
-
 type stateTypes = {
   searchBy: string
   filterBy: string
@@ -29,4 +24,9 @@ type Movie = {
   vote_count?: number
 }
 
-export type { Movie, stateTypes, actionType }
+type Action <P extends string, T> = {
+  type: P
+  payload: T
+}
+
+export type { Movie, stateTypes, Action}

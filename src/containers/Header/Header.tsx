@@ -1,4 +1,11 @@
-import { setFilterType, setSearchStatus, setSearchQuery, setSearchType } from '../../store'
+import {
+  setFilterType,
+  setSearchStatus,
+  setSearchQuery,
+  setSearchType,
+  setMainPageError,
+  resetMainPageError,
+} from '../../store'
 import { Button } from '../../components'
 import { useAppDispatch, useAppSelector } from '../../hook'
 
@@ -6,30 +13,35 @@ import { useSearchParams } from 'react-router-dom'
 
 const Header = () => {
   const dispatch = useAppDispatch()
-  const searchQuery:string = useAppSelector((state) => state.searchParam.searchQuery)
-  const searchBy:string = useAppSelector((state) => state.searchParam.searchBy)
-  const filterBy:string  = useAppSelector((state) => state.searchParam.filterBy)
+  const searchQuery = useAppSelector(
+    (state) => state.searchParam.searchQuery
+  )
+  const searchBy = useAppSelector((state) => state.searchParam.searchBy)
+  const filterBy = useAppSelector((state) => state.searchParam.filterBy)
 
   const [searchParams, setSearchParams] = useSearchParams()
 
   const handlerForm = (event: any) => {
     event.preventDefault()
 
-    dispatch(setSearchStatus(true))
+    if(searchQuery.length > 1) {
+      dispatch(setSearchStatus(true))
 
-    setSearchParams({
-      query: searchQuery,
-      searchBy: searchBy,
-      filterBy: filterBy,
-    })
+      setSearchParams({
+        query: searchQuery,
+        searchBy: searchBy,
+        filterBy: filterBy,
+      })
+    }
   }
 
   const handlerInput = (event: any) => {
     dispatch(setSearchQuery(event.target.value))
-    
-    if(searchQuery.length === 1) {
+
+    if (searchQuery.length === 1) {
       dispatch(setSearchStatus(false))
       dispatch(setFilterType('vote_average'))
+      dispatch(resetMainPageError())
       setSearchParams({})
     }
   }

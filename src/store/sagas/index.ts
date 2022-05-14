@@ -7,10 +7,15 @@ import {
 import {
   finishSetMovies,
   finishSetSameGenreMovies,
+  setMainPageError,
   setSelectedMovie,
-} from '../actions'
+  setViewPageHeadError,
+} from '../actions/actions'
 import {
   MAIN_PAGE_ERROR,
+  SET_NEW_TAB_MOVIE,
+  START_SET_MOVIES,
+  START_SET_SAME_GENRE_MOVIES,
   VIEW_PAGE_HEAD_ERROR,
   VIEW_PAGE_MAIN_ERROR,
 } from '../constants'
@@ -38,10 +43,7 @@ export function* handleMovies(action: HandleMoviesType) {
     )
 
     if (!data.length) {
-      yield put({
-        type: MAIN_PAGE_ERROR,
-        payload: 'Error fetching movies by params',
-      })
+      yield put(setMainPageError())
       yield put(finishSetMovies([]))
       return
     }
@@ -74,10 +76,7 @@ export function* handleViewPageHeader(action: ActionType) {
 
     yield put(setSelectedMovie([movie]))
   } catch (err) {
-    yield put({
-      type: VIEW_PAGE_HEAD_ERROR,
-      payload: 'Error fetching movie information',
-    })
+    yield put(setViewPageHeadError())
   }
 }
 
@@ -91,18 +90,15 @@ export function* handleViewPageMain(action: ActionType) {
 
     yield put(finishSetSameGenreMovies(sameGenreMovies))
   } catch (err) {
-    yield put({
-      type: VIEW_PAGE_HEAD_ERROR,
-      payload: 'Error fetching same genre movies',
-    })
+    yield put(setViewPageHeadError())
   }
 }
 
 export function* watchSaga() {
-  yield takeEvery('START_SET_MOVIES', handleMovies)
-  yield takeEvery('START_SET_SAME_GENRE_MOVIES', handleTransitionFromMainPage)
-  yield takeEvery('SET_NEW_TAB_MOVIE', handleViewPageHeader)
-  yield takeEvery('SET_NEW_TAB_MOVIE', handleViewPageMain)
+  yield takeEvery(START_SET_MOVIES, handleMovies)
+  yield takeEvery(START_SET_SAME_GENRE_MOVIES, handleTransitionFromMainPage)
+  yield takeEvery(SET_NEW_TAB_MOVIE, handleViewPageHeader)
+  yield takeEvery(SET_NEW_TAB_MOVIE, handleViewPageMain)
 }
 
 export function* rootSaga() {

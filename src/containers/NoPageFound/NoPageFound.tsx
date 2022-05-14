@@ -1,5 +1,5 @@
 import { useAppDispatch } from '../../hook'
-import { resetMainPageError } from '../../store/actions'
+import { resetMainPageError } from '../../store/actions/actions'
 
 import { Link } from 'react-router-dom'
 type Props = {

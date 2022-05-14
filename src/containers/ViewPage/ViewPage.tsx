@@ -4,26 +4,28 @@ import { fetchDataById, getGenreOutput, fetchDataByGenre } from '../../utils'
 import { useAppDispatch, useAppSelector } from '../../hook'
 
 import { Movie } from '../../models/interfaces'
-import { setNewTabMovie, setSelectedMovie, startSetSameGenreMovies } from '../../store'
+import {
+  setNewTabMovie,
+  setSelectedMovie,
+  startSetSameGenreMovies,
+} from '../../store'
 
 import React, { useEffect } from 'react'
 import { Link, useParams } from 'react-router-dom'
 
 const ViewPage = () => {
-  const sameGenreMovies: Array<Movie> = useAppSelector(
+  const sameGenreMovies = useAppSelector(
     (state) => state.movies.sameGenreMovies
   )
-  const selectedMovie: Array<Movie> = useAppSelector(
-    (state) => state.movies.selectedMovie
-  )
-  const data: Array<Movie> = useAppSelector((state) => state.movies.data)
+  const selectedMovie = useAppSelector((state) => state.movies.selectedMovie)
+  const data = useAppSelector((state) => state.movies.data)
   const dispatch = useAppDispatch()
-    
-  const { id = 'no-page-found'} = useParams()
+
+  const { id = 'no-page-found' } = useParams()
 
   const [chosenMovie] = selectedMovie
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  const cachedID = [data.find((item: Movie) => item.id === +id)] as Array<Movie>
+  const cachedID = [data.find((item) => item.id === +id)] as Array<Movie>
   const [movie] = cachedID
 
   useEffect(() => {

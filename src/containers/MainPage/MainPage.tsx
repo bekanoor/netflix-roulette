@@ -4,7 +4,7 @@ import {
   setFilterType,
   setSearchStatus,
   startSetMoviesWithParams,
-} from '../../store/actions'
+} from '../../store/actions/actions'
 import { useAppDispatch, useAppSelector } from '../../hook'
 import { MAIN_PAGE_ERROR } from '../../store/constants'
 
@@ -14,17 +14,15 @@ import { useSearchParams } from 'react-router-dom'
 const MainPage = () => {
   const dispatch = useAppDispatch()
   const movies = useAppSelector((state) => state.movies.data)
-  const mainPageError: string = useAppSelector(
-    (state) => state.errors.mainPageError
-  )
-  
-  const searchStatus: boolean = useAppSelector(
+  const mainPageError = useAppSelector((state) => state.errors.mainPageError)
+
+  const searchStatus = useAppSelector(
     (state) => state.searchParam.searchStatus
   )
-  const searchQuery: string = useAppSelector(
+  const searchQuery = useAppSelector(
     (state) => state.searchParam.searchQuery
   )
-  const [searchParams, setSearchParams] = useSearchParams()
+  const [searchParams] = useSearchParams()
 
   const query = searchParams.get('query')
   const searchType = searchParams.get('searchBy') || 'title'
@@ -37,7 +35,7 @@ const MainPage = () => {
       dispatch(startSetMoviesWithParams([query, searchType, filterBy]))
     }
   }, [filterBy, searchParams, dispatch, query, searchType])
-  
+
   if (searchStatus && searchQuery.length) {
     return (
       <div className='wrapper'>
@@ -48,20 +46,13 @@ const MainPage = () => {
       </div>
     )
   }
-  
-  // if (isButton) {
-  //   dispatch(setSearchButton(false))
-  //   dispatch(setFilterType('vote_average'))
-  //   setSearchParams({})
-  // }
 
-  // if (mainPageError) {
-  //   return <NoPageFound text='404 not movie found' />
-  // }
-  
-  if (!movies.length)
-    return <h1 style={{ color: 'white' }}>Loading...</h1>
-  
+  if (mainPageError) {
+    return <NoPageFound text='404 not movie found' />
+  }
+
+  if (!movies.length) return <h1 style={{ color: 'white' }}>Loading...</h1>
+
   return (
     <div className='wrapper'>
       <Header />

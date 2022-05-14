@@ -1,3 +1,3 @@
-import { Movie, stateTypes, actionType } from './interfaces'
+import { Movie, stateTypes, Action } from './interfaces'
 
-export type { Movie, stateTypes, actionType };
+export type { Movie, stateTypes, Action };
