@@ -7,7 +7,7 @@ interface IProps {
 }
 
 const SortResult: React.FC<IProps> = ({movieLength}) => {
-  const { filterBy } = useAppSelector(state => state)
+  const filterBy:string = useAppSelector(state => state.searchParam.filterBy)
   const dispatch = useAppDispatch()
   
   return (
@@ -27,7 +27,6 @@ const SortResult: React.FC<IProps> = ({movieLength}) => {
           <li>
             <button
               onClick={() => dispatch(setFilterType('vote_average'))}
-              // className='sort-result__item sort-result--active'
               className={filterBy === 'vote_average' ? 'sort-result__item sort-result--active' : 'sort-result__item'}
             >
               rating
