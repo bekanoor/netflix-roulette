@@ -19,7 +19,7 @@ const FilmCard = (props: IProps) => {
         data-testid='film-card-test'
       >
         <div className='film-card__image-container'>
-          {/* <img className='film-card__image' src={cover} alt={filmTitle}></img> */}
+          <img className='film-card__image' src={cover} alt={filmTitle}></img>
         </div>
         <div className='film-card__title-container'>
           <p className='film-card__title'>{filmTitle}</p>

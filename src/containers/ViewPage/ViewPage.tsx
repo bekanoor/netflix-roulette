@@ -36,7 +36,7 @@ const ViewPage = () => {
       dispatch(setSelectedMovie(cachedID))
       dispatch(startSetSameGenreMovies(genre))
     } else {
-      dispatch(setNewTabMovie(id))
+      dispatch(setNewTabMovie([id, sameGenreMovies]))
     }
   }, [id])
 

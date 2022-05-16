@@ -82,8 +82,10 @@ export const finishSetSameGenreMovies = (
   return { type: SET_SAME_GENRE_MOVIES, payload: value }
 }
 
-export const setNewTabMovie = (id: string): SetNewTabMovie => {
-  return { type: SET_NEW_TAB_MOVIE, payload: id }
+export const setNewTabMovie = (
+  data: [string, Array<Movie>]
+): SetNewTabMovie => {
+  return { type: SET_NEW_TAB_MOVIE, payload: data }
 }
 
 export const setMainPageError = (): SetMainPageError => {

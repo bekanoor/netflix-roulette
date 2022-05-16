@@ -12,16 +12,14 @@ import {
   setViewPageHeadError,
 } from '../actions/actions'
 import {
-  MAIN_PAGE_ERROR,
   SET_NEW_TAB_MOVIE,
   START_SET_MOVIES,
   START_SET_SAME_GENRE_MOVIES,
-  VIEW_PAGE_HEAD_ERROR,
-  VIEW_PAGE_MAIN_ERROR,
 } from '../constants'
 
 import { call, put, takeEvery } from 'redux-saga/effects'
 import { Movie } from 'src/models'
+import { useAppSelector } from 'src/hook'
 
 type HandleMoviesType = {
   type: string
@@ -67,13 +65,24 @@ export function* handleTransitionFromMainPage(
 
 type ActionType = {
   type: string
-  payload: string
+  payload: [string, Array<Movie>]
 }
 
 export function* handleViewPageHeader(action: ActionType) {
   try {
-    const movie: Movie = yield call(fetchDataById, action.payload)
+    const [id, movies] = action.payload
 
+    const [cachedMovie] = [
+      movies.find((item) => item.id === +id),
+    ] as Array<Movie>
+
+    if (cachedMovie) {
+      yield put(setSelectedMovie([cachedMovie]))
+      return
+    }
+
+    const movie: Movie = yield call(fetchDataById, id)
+    //here
     yield put(setSelectedMovie([movie]))
   } catch (err) {
     yield put(setViewPageHeadError())
@@ -82,7 +91,8 @@ export function* handleViewPageHeader(action: ActionType) {
 
 export function* handleViewPageMain(action: ActionType) {
   try {
-    const movie: Movie = yield call(fetchDataById, action.payload)
+    const [id] = action.payload
+    const movie: Movie = yield call(fetchDataById, id)
     const { genres } = movie
     const [genre] = genres
 

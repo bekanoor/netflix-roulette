@@ -12,10 +12,10 @@ const composeEnhancers =
     ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__({})
     : compose
 
-const rootReducer = combineReducers({ 
+const rootReducer = combineReducers({
   searchParam: searchParamReducer,
   movies: moviesReducer,
-  errors: errorReducer
+  errors: errorReducer,
 })
 
 const store = createStore(
